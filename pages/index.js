@@ -22,7 +22,9 @@ export default function Index() {
 
   function drawItems() {
     if (error) return <div>Failed to load</div>;
-    if (!data) return <div>Loading...</div>;
+		if (!data) return <div>Loading...</div>;
+		
+		console.log(data);
 
     const entries = data.data.entries.data;
 
