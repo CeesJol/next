@@ -1,35 +1,29 @@
-import Head from 'next/head'
+import useSWR from 'swr'
 
-export default function Home() {
+const fetcher = (query) =>
+  fetch('/api/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({ query }),
+  })
+    .then((res) => res.json())
+    .then((json) => json.data)
+
+export default function Index() {
+  const { data, error } = useSWR('{ users { name } }', fetcher)
+
+  if (error) return <div>Failed to load</div>
+  if (!data) return <div>Loading...</div>
+
+  const { users } = data
+
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        main content
-      </main>
-
-      <footer>
-        footer component
-      </footer>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
+    <div>
+      {users.map((user, i) => (
+        <div key={i}>{user.name}</div>
+      ))}
     </div>
   )
 }
