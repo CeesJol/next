@@ -5,17 +5,19 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-		"start": "next start",
-		"export": "next export"
+    "start": "next start",
+    "export": "next export"
   },
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
     "apollo-server-micro": "^2.13.1",
+    "faunadb": "^2.14.1",
     "graphql": "^15.0.0",
-    "next": "9.4.2",
+    "next": "^9.4.2",
     "node-sass": "^4.14.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-native": "^0.62.2",
     "swr": "^0.2.2"
-  }
+	}
 }

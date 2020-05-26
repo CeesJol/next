@@ -1,0 +1,13 @@
+type Field {
+  testField: String!
+}
+
+type User {
+	username: String!
+}
+
+type Query {
+  entries: [Field]
+	users: [User]
+	user: User
+}

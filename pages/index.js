@@ -1,29 +1,41 @@
-import useSWR from 'swr'
+import React, { useState, useEffect } from "react";
+import { myFunction } from "./api/fauna";
 
-const fetcher = (query) =>
-  fetch('/api/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify({ query }),
-  })
-    .then((res) => res.json())
-    .then((json) => json.data)
+import styles from "../styles/styles.scss";
 
 export default function Index() {
-  const { data, error } = useSWR('{ users { name } }', fetcher)
+  const [data, setData] = useState(false);
+  const [error, setError] = useState(false);
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
+  useEffect(() => {
+    if (!data && !error) {
+      myFunction().then(
+        (data) => {
+          setData(data);
+        },
+        (error) => {
+          setError(error);
+        }
+      );
+    }
+  });
 
-  const { users } = data
+  function drawItems() {
+    if (error) return <div>Failed to load</div>;
+    if (!data) return <div>Loading...</div>;
+
+    const entries = data.data.entries.data;
+
+    if (entries.length == 0) return <div>Nothing to see here</div>;
+    return entries.map((entry, i) => (
+      <div key={i}>{i + " -> " + entry.testField}</div>
+    ));
+  }
 
   return (
     <div>
-      {users.map((user, i) => (
-        <div key={i}>{user.name}</div>
-      ))}
+      <p className="example">Hello fuckface</p>
+      {drawItems()}
     </div>
-  )
+  );
 }
