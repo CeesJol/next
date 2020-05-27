@@ -1,0 +1,42 @@
+.arguments {
+  @include gradient2;
+
+  &__content {
+    @include content-container;
+
+    text-align: center;
+
+    color: white;
+
+    // padding-bottom: 10rem;
+  }
+
+  &__args {
+    @include responsive;
+
+    text-align: left;
+
+		@media (min-width: $desktop-breakpoint) {
+			div {
+				margin: 0 2rem;
+			}
+
+			div:first-of-type {
+				margin-left: 0;
+			}
+
+			div:last-of-type {
+				margin-right: 0;
+			}
+		}
+  }
+
+  &__arg {
+
+  }
+
+  footer {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+}

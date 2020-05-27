@@ -14,6 +14,6 @@ module.exports = withSass({
   },
   env: {
 		'FAUNADB_SECRET_KEY': process.env.FAUNADB_SECRET_KEY,
-		'faunaDbGraphQlEndpoint': 'https://graphql.fauna.com/graphql'
+		'FAUNADB_GRAPHQL_ENDPOINT': 'https://graphql.fauna.com/graphql',
   }
 })

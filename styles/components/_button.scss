@@ -1,0 +1,22 @@
+.button-container {
+	a:hover {
+		opacity: 1 !important;
+	}
+}
+
+.button {
+	background-color: $light-green;
+	border: none;
+	border-radius: 3px;
+	color: white;
+	padding: .5rem 2rem;
+	font-weight: 500;
+	text-transform: uppercase;
+	transition: 0.3s;
+
+	
+
+	&:hover {
+		background-color: lighten($light-green, 7%);
+	}
+}

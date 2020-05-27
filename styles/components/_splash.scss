@@ -1,0 +1,50 @@
+.splash {
+	@include splash-height;
+	@include gradient;
+
+		display: flex;
+		align-items: center;
+
+	&__content {
+		@include content-container;
+
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		position: relative;
+		color: white;
+
+		&--title {
+			display: block;
+			line-height: 1;
+			padding-bottom: 2rem;
+		}
+	}
+
+	&__left {
+		@media (max-width: $desktop-breakpoint) {
+			width: 100%;
+			max-width: 50rem;
+
+			text-align: center;
+		}
+
+		@media (min-width: $desktop-breakpoint) {
+			width: 30rem;
+			margin-right: 5rem;
+		}
+
+		height: auto;
+	}
+
+	&__right {
+		@media (max-width: $desktop-breakpoint) {
+			display: none;
+		}
+
+		flex-grow: 1;
+	}
+}
+
+
+

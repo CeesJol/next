@@ -1,0 +1,13 @@
+.intro {
+	@include content-container;
+
+	h2 {
+		padding-top: 2rem;
+		position: relative;
+	}
+
+	&__content {
+		text-align: center;
+		
+	}
+}

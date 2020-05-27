@@ -2,12 +2,24 @@ type Field {
   testField: String!
 }
 
+type Post {
+	title: String!
+	user: User
+}
+
 type User {
 	username: String!
+	posts: [Post] @relation
 }
 
 type Query {
   entries: [Field]
 	users: [User]
-	user: User
+	user(username: String!): User
+	posts: [Post]
 }
+
+# type Mutation {
+#   createPost(input: PostInput): Post
+#   updatePost(id: ID!, input: PostInput): Post
+# }
