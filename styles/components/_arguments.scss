@@ -13,7 +13,7 @@
 
   &__args {
     @include responsive;
-
+		margin-top: 5rem;
     text-align: left;
 
 		@media (min-width: $desktop-breakpoint) {
@@ -29,10 +29,6 @@
 				margin-right: 0;
 			}
 		}
-  }
-
-  &__arg {
-
   }
 
   footer {

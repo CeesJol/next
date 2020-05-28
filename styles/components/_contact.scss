@@ -2,7 +2,7 @@
   @include gradient3;
   position: relative;
   margin-top: 5rem;
-  padding-bottom: 0 !important;
+	padding-bottom: 0 !important;
 
   &__content {
     @include content-container;
@@ -45,7 +45,8 @@ textarea {
   margin-bottom: 3rem;
   outline: none;
   transition: 0.3s;
-  padding: 0.75rem 1.5rem;
+	padding: 0.75rem 1.5rem;
+	font-size: $font-size-default;
 }
 
 input:focus,

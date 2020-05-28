@@ -1,4 +1,3 @@
-// import faunadb, { query as q } from "faunadb";
 import useFetch from "../../lib/useFetch";
 
 const secret = process.env.FAUNADB_SECRET_KEY;

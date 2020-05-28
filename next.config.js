@@ -1,19 +1,8 @@
 require('dotenv').config()
-const withSass = require('@zeit/next-sass')
-const webpack = require('webpack')
 
-module.exports = withSass({
-  webpack(config) {
-    config.plugins.push(
-      new webpack.ProvidePlugin({
-          '$': 'jquery',
-          'jQuery': 'jquery',
-      })
-    )
-    return config
-  },
+module.exports = {
   env: {
 		'FAUNADB_SECRET_KEY': process.env.FAUNADB_SECRET_KEY,
 		'FAUNADB_GRAPHQL_ENDPOINT': 'https://graphql.fauna.com/graphql',
   }
-})
+}

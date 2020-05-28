@@ -9,6 +9,7 @@ type Post {
 
 type User {
 	username: String!
+	email: String! @unique
 	posts: [Post] @relation
 }
 
@@ -16,6 +17,7 @@ type Query {
   entries: [Field]
 	users: [User]
 	user(username: String!): User
+	userByEmail(email: String!): User
 	posts: [Post]
 }
 

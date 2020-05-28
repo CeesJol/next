@@ -1,10 +1,10 @@
 import Header from "./header"
 import Footer from "./footer"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, transparentHeader }) => {
   return (
     <div>
-      <Header />
+      <Header transparentHeader={transparentHeader} />
       <div>
         <main>{children}</main>
       </div>

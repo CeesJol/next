@@ -14,7 +14,7 @@ const Niche = () => (
           </p>
         </div>
         <div className="niche__illustration">
-          <p>Fucking illustration goes here</p>
+          <img src="/images/influencer.png" />
         </div>
       </div>
     </div>

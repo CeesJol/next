@@ -1,25 +1,25 @@
-import React from "react"
-import Link from 'next/link'
+import React from "react";
+import Link from "next/link";
 
-const Header = ({ transparent = true }) => (
-	<header 
-		className={transparent ? 'header header--transparent' : 'header'}
-	>
+const Header = ({ transparentHeader = false }) => (
+  <header
+    className={transparentHeader ? "header header--transparent" : "header"}
+  >
     <div className="header__left">
       <h3>
-        <Link className="header__title" href="/">
-          Project name
+        <Link href="/">
+          <a className="header__title">Project name</a>
         </Link>
       </h3>
     </div>
     <div className="header__right">
-      <h3>
+      <h4>
         <Link href="/login">
-          Log in
+          <a>Log in</a>
         </Link>
-      </h3>
+      </h4>
     </div>
   </header>
-)
+);
 
-export default Header
+export default Header;

@@ -9,7 +9,6 @@
     "export": "next export"
   },
   "dependencies": {
-    "@zeit/next-sass": "^1.0.1",
     "apollo-server-micro": "^2.13.1",
     "faunadb": "^2.14.1",
     "graphql": "^15.0.0",
@@ -18,6 +17,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-native": "^0.62.2",
+    "sass": "^1.26.5",
     "swr": "^0.2.2"
   }
 }
