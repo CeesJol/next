@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import Router from 'next/router'
 
 import Layout from "../components/layout";
 import LoginOptions from "../components/login-options";
+import Button from "../components/button";
 
 import { login, signup } from "./api/auth"
 
@@ -11,27 +13,22 @@ export default function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const handleLogin = (event) => {
-		event.preventDefault();
+		if (event) event.preventDefault();
 		setStatus('Authenticating...');
 		login(email, password).then((response) => {
 			setStatus('Login succeeded!')
 			setSecret(response.secret);
+			Router.push('/dashboard')
 		}, (err) => {
 			setStatus('Login failed')
 		});
 	}
 	const handleSignUp = (event) => {
-		event.preventDefault();
+		console.log('fff');
+		if (event) event.preventDefault();
 		setStatus('Creating account...');
 		signup(email, password).then((response) => {
-			setStatus('Logging in...')
-			console.log('signup res:', response)
-			login(email, password).then((response) => {
-				setStatus('Login succeeded!')
-				setSecret(response.secret);
-			}, (err) => {
-				setStatus('Login failed')
-			});
+			handleLogin();
 		}, (err) => {
 			setStatus('Signup failed')
 		});
@@ -71,8 +68,8 @@ export default function Login() {
               onChange={handleChangePassword}
             />			
 
-            <button onClick={handleLogin}>Log in</button>
-						<button onClick={handleSignUp}>Sign up</button>
+            <Button fn={handleLogin} text="Log in" />
+						<Button fn={handleSignUp} text="Sign up" />
 
 						{status && <p>Status: {status}</p>}
 						{secret && <p>Secret: {secret}</p>}

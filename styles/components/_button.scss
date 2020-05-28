@@ -1,4 +1,7 @@
 .button-container {
+	display: inline;
+	margin-right: 1rem;
+	
 	a:hover {
 		opacity: 1 !important;
 	}
@@ -14,8 +17,6 @@
 	text-transform: uppercase;
 	transition: 0.3s;
 	font-size: $font-size-default;
-
-	
 
 	&:hover {
 		background-color: lighten($light-green, 7%);
