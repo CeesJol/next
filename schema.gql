@@ -8,7 +8,7 @@ type Post {
 }
 
 type User {
-	username: String!
+	username: String
 	email: String! @unique
 	posts: [Post] @relation
 }

@@ -3,22 +3,37 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/layout";
 import LoginOptions from "../components/login-options";
 
-import { auth } from "./api/auth"
+import { login, signup } from "./api/auth"
 
 export default function Login() {
 	const [status, setStatus] = useState(null);
 	const [secret, setSecret] = useState(null);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const handleAuth = (event) => {
+	const handleLogin = (event) => {
 		event.preventDefault();
-		console.log('asdfasdfasf');
 		setStatus('Authenticating...');
-		auth(email, password).then((response) => {
-			setStatus('Auth succeeded!')
+		login(email, password).then((response) => {
+			setStatus('Login succeeded!')
 			setSecret(response.secret);
 		}, (err) => {
-			setStatus('Auth failed')
+			setStatus('Login failed')
+		});
+	}
+	const handleSignUp = (event) => {
+		event.preventDefault();
+		setStatus('Creating account...');
+		signup(email, password).then((response) => {
+			setStatus('Logging in...')
+			console.log('signup res:', response)
+			login(email, password).then((response) => {
+				setStatus('Login succeeded!')
+				setSecret(response.secret);
+			}, (err) => {
+				setStatus('Login failed')
+			});
+		}, (err) => {
+			setStatus('Signup failed')
 		});
 	}
 	const handleChangeEmail = (event) => {
@@ -29,7 +44,7 @@ export default function Login() {
 	}
   useEffect(() => {
 		// if (!status) {
-		// 	handleAuth();
+		// 	handleLogin();
 		// }
   }, []);
 
@@ -37,7 +52,6 @@ export default function Login() {
     <Layout>
       <div className="container">
         <div className="login">
-					{/* <p>Secret: {secret}</p> */}
           <form>
             <label htmlFor='email'>Email</label>
             <input
@@ -57,9 +71,11 @@ export default function Login() {
               onChange={handleChangePassword}
             />			
 
-            <button onClick={handleAuth}>Test</button>
+            <button onClick={handleLogin}>Log in</button>
+						<button onClick={handleSignUp}>Sign up</button>
 
 						{status && <p>Status: {status}</p>}
+						{secret && <p>Secret: {secret}</p>}
           </form>
         </div>
       </div>
