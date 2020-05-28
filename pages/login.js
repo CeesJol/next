@@ -20,17 +20,16 @@ export default function Login() {
 			setSecret(response.secret);
 			Router.push('/dashboard')
 		}, (err) => {
-			setStatus('Login failed')
+			setStatus(`Login failed: ${err}`)
 		});
 	}
 	const handleSignUp = (event) => {
-		console.log('fff');
 		if (event) event.preventDefault();
 		setStatus('Creating account...');
 		signup(email, password).then((response) => {
 			handleLogin();
 		}, (err) => {
-			setStatus('Signup failed')
+			setStatus(`Signup failed: ${err}`)
 		});
 	}
 	const handleChangeEmail = (event) => {
@@ -56,7 +55,7 @@ export default function Login() {
               id='email'
               name='email'
               value={email}
-              onChange={handleChangeEmail}
+							onChange={handleChangeEmail}
             />
 
 						<label htmlFor='password'>Password</label>
@@ -65,7 +64,7 @@ export default function Login() {
               id='password'
               name='password'
               value={password}
-              onChange={handleChangePassword}
+							onChange={handleChangePassword}
             />			
 
             <Button fn={handleLogin} text="Log in" />
