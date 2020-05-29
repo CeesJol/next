@@ -1,5 +1,4 @@
 .userfooter {
-	@include content-container;
 	@include gradient3;
 	position: fixed;
 	left: 0;
@@ -11,6 +10,10 @@
 	text-align: center;
 	cursor: pointer;
 	transition: 0.3s;
+
+	&__content {
+		@include content-container;
+	}
 
 	a {
 		color: white;

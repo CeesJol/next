@@ -1,9 +1,11 @@
-import React from "react"
+import React from "react";
 
 const Footer = () => (
   <footer className="footer">
-    © {new Date().getFullYear()} Project name
+    <div className="footer__content">
+      © {new Date().getFullYear()} Project name
+    </div>
   </footer>
-)
+);
 
-export default Footer
+export default Footer;

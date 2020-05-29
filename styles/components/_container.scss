@@ -2,4 +2,9 @@
 	position: relative;
 	padding-top: $default-padding;
 	padding-bottom: $default-padding;
+	background-color: white;
+
+	&--nocolor {
+		background-color: inherit;
+	}
 }

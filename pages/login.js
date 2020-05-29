@@ -63,7 +63,7 @@ export default function Login() {
 
   return (
     <Layout>
-      <div className="container">
+      <div className="container container--nocolor">
         <div className="login">
           <form>
             <label htmlFor="email">Email</label>
