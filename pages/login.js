@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Router from 'next/router'
 
 import Layout from "../components/layout";
@@ -6,6 +6,8 @@ import LoginOptions from "../components/login-options";
 import Button from "../components/button";
 
 import { login, signup } from "./api/auth"
+
+import { UserContext } from '../contexts/userContext';
 
 export default function Login() {
 	const [status, setStatus] = useState(null);
@@ -38,11 +40,16 @@ export default function Login() {
 	const handleChangePassword = (event) => {
 		setPassword(event.target.value)
 	}
-  useEffect(() => {
-		// if (!status) {
-		// 	handleLogin();
-		// }
-  }, []);
+  // useEffect(() => {
+	// 	// if (!status) {
+	// 	// 	handleLogin();
+	// 	// }
+	// }, []);
+	
+	const { user, storeUser } = useContext(UserContext);
+	useEffect(() => {
+		console.log('login page: ', user);
+	})
 
   return (
     <Layout>
@@ -65,13 +72,13 @@ export default function Login() {
               name='password'
               value={password}
 							onChange={handleChangePassword}
-            />			
-
-            <Button fn={handleLogin} text="Log in" />
-						<Button fn={handleSignUp} text="Sign up" />
+            />
 
 						{status && <p>Status: {status}</p>}
 						{secret && <p>Secret: {secret}</p>}
+
+            <Button fn={handleLogin} text="Log in" />
+						<Button fn={handleSignUp} text="Sign up" />
           </form>
         </div>
       </div>

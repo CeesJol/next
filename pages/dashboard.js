@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import Layout from "../components/layout";
 
-export default function Login() {
+export default function Dashboard() {
   return (
     <Layout>
       <div className="container">

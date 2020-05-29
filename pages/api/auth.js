@@ -19,10 +19,7 @@ const validate = (email, password) => {
 
 export const login = (email, password) => {
   const validationError = validate(email, password);
-  if (validationError)
-    return new Promise((resolve, reject) => {
-      reject(validationError);
-    });
+  if (validationError) return Promise.reject(validationError);
   return client.query(
     q.Login(q.Match(q.Index("userByEmail"), email), {
       password,
@@ -32,10 +29,7 @@ export const login = (email, password) => {
 
 export const signup = (email, password) => {
   const validationError = validate(email, password);
-  if (validationError)
-    return new Promise((resolve, reject) => {
-      reject(validationError);
-    });
+  if (validationError) return Promise.reject(validationError);
   return client.query(
     q.Create(q.Collection("User"), {
       credentials: { password },
