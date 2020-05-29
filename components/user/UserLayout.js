@@ -1,10 +1,12 @@
+import Link from "next/link"
+
 import UserHeader from "./UserHeader"
 import UserFooter from "./UserFooter"
 
-const UserLayout = ({ children }) => {
+const UserLayout = ({ children, name }) => {
   return (
     <div>
-      <UserHeader />
+      <UserHeader name={name} />
       <div>
         <main>{children}</main>
       </div>

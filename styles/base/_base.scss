@@ -38,8 +38,8 @@ a {
 	}
 }
 
-body, header, footer {
-  font-family: 'Roboto', -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+body {
+  font-family: 'Roboto', -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif !important;
 	font-size: $font-size-default;
 	color: $dark-grey;
 	line-height: 1.6;

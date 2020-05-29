@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Link from "next/link";
 import UserContext from "../../contexts/userContext";
 
-const UserHeader = () => {
+const UserHeader = ({ name = 'Your instagram username' }) => {
   return (
     <header
       className="userheader"
@@ -10,7 +10,7 @@ const UserHeader = () => {
       <div className="userheader__left">
         <h3>
           <Link href="/">
-            <a className="userheader__title">Project name</a>
+            <a className="userheader__title">{name}</a>
           </Link>
         </h3>
       </div>

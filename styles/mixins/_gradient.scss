@@ -16,4 +16,13 @@
 @mixin gradient3 {
 	background: rgb(119,123,248);
 	background: linear-gradient(90deg, rgba(119,123,248,1) 0%, rgba(114,167,248,1) 100%);
+
+	&:hover {
+		background: lighten(rgb(119,123,248), 4%);
+		background: linear-gradient(90deg, lighten(rgba(119,123,248,1), 4%) 0%, lighten(rgba(114,167,248,1), 4%) 100%);
+	}
 }
+
+// @mixin gradient3-hover {
+	
+// }

@@ -1,8 +1,22 @@
 .userfooter {
 	@include content-container;
-	position: relative;
+	@include gradient3;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
 	padding-top: 2rem;
 	padding-bottom: 2rem;
-	color: lightgrey;
-	border-top: 1px solid lightgrey;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+	transition: 0.3s;
+
+	a {
+		color: white;
+	}
+
+	// &:hover {
+	// 	@include gradient3-hover;
+	// }
 }
