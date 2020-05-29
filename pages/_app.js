@@ -1,28 +1,46 @@
+import React from "react";
+import App from "next/app";
+import Head from "next/head";
+import UserContext from "../contexts/userContext";
+
 import "../styles/index.scss";
 
-// export default function MyApp({ Component, pageProps }) {
-//   return <Component {...pageProps} />
-// }
-
-import React from 'react'
-import App from 'next/app'
-import Head from 'next/head'
-import UserContextProvider from '../contexts/userContext';
 class MyApp extends App {
+  state = {
+    user: null,
+  };
+  storeUser = (user) => {
+    this.setState(prevState => ({
+			user: {
+				...prevState.user,
+				...user
+			}
+		}));
+  };
+  userExists = () => {
+    return !!this.state.user;
+  };
   render() {
     const { Component, pageProps } = this.props;
     return (
       <div>
         <div>
           <Head>
-            // stuff.....
+            <title>Project name</title>
           </Head>
         </div>
-        <UserContextProvider>
+        <UserContext.Provider
+          value={{
+            user: this.state.user,
+            storeUser: this.storeUser,
+            userExists: this.userExists,
+          }}
+        >
           <Component {...pageProps} />
-        </UserContextProvider>
+        </UserContext.Provider>
       </div>
-    )
+    );
   }
 }
-export default MyApp
+
+export default MyApp;

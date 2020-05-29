@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Link from "next/link";
-import { UserContext } from "../contexts/userContext";
+import UserContext from "../contexts/userContext";
 
 const Header = ({ transparentHeader = false }) => {
-  const { user, userExists } = useContext(UserContext);
+	const { user, userExists } = useContext(UserContext);
+	useEffect(() => {
+		// console.log('header user', user)
+	})
+  
   return (
     <header
       className={transparentHeader ? "header header--transparent" : "header"}

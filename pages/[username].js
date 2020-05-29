@@ -1,18 +1,18 @@
 import { getUser } from "./api/fauna";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Layout from "../components/layout";
+import UserLayout from "../components/user/UserLayout";
 
 export default function User() {
   const [data, setData] = useState(false);
   const [error, setError] = useState(false);
   const router =  useRouter();
-	const { user } = router.query;
+	const { username } = router.query;
 
   useEffect(() => {
-    if (user && !data && !error) {
-			console.log(`Req for ${user}`);
-      getUser(user).then(
+    if (username && !data && !error) {
+			console.log(`Req for ${username}`);
+      getUser(username).then(
         (data) => {
           setData(data);
         },
@@ -40,13 +40,13 @@ export default function User() {
   }
 
   return (
-    <Layout>
+    <UserLayout>
 			<div className="container">
 				<div className="user">
-					<div>Hi, {user}</div>
+					<div>Hi, {username}</div>
 					{drawItems()}
 				</div>
 			</div>
-    </Layout>
+    </UserLayout>
   );
 }
