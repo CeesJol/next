@@ -62,35 +62,37 @@ export default function Login() {
   });
 
   return (
-    <Layout>
-      <div className="container container--nocolor">
         <div className="login">
-          <form>
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              value={email}
-              onChange={handleChangeEmail}
-            />
+          <div className="login__box">
+						<div className="login__box__content">
+            <form>
+							<h4 className="login__box--title">Program name</h4>
+							<h4 className="login__box--subtitle">Create your Program name account</h4>
+              <label htmlFor="email">Email</label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                value={email}
+                onChange={handleChangeEmail}
+              />
 
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handleChangePassword}
-            />
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={handleChangePassword}
+              />
 
-            {status && <p>Status: {status}</p>}
+              {status && <p>Status: {status}</p>}
 
-            <Button fn={handleLogin} text="Log in" />
-            <Button fn={handleSignUp} text="Sign up" />
-          </form>
+              <Button fn={handleLogin} text="Log in" />
+              <Button fn={handleSignUp} text="Sign up" />
+            </form>
+						</div>
+          </div>
         </div>
-      </div>
-    </Layout>
   );
 }
