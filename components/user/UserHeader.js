@@ -4,19 +4,19 @@ import UserContext from "../../contexts/userContext";
 
 const UserHeader = ({ name }) => {
   return (
-    <header className="userheader">
-      <div className="userheader__content">
-        <div className="userheader__left">
+    <header className="header userheader">
+      <div className="header__content">
+        <div className="header__left">
           <h3>
             <a
               href={`https://instagram.com/${name}`}
-              className="userheader__title"
+              className="header__title"
             >
               {name}
             </a>
           </h3>
         </div>
-        <div className="userheader__right">
+        <div className="header__right">
           {/* <h4>
           not sure what here
         </h4> */}

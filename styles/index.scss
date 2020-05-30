@@ -12,6 +12,7 @@
 @import './components/cta';
 @import './components/container';
 @import './components/content-container';
+
 @import './components/demo';
 @import './components/footer';
 @import './components/header';
@@ -21,10 +22,13 @@
 @import './components/splash';
 @import './components/wave';
 
-@import './misc/input';
+@import './components/dashboard/dashboard';
+@import './components/dashboard/dashboardheader';
 
+@import './components/user/post';
 @import './components/user/usercontainer';
 @import './components/user/userfooter';
 @import './components/user/userheader';
-@import './components/user/post';
 @import './components/user/user';
+
+@import './misc/input';

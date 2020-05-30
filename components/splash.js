@@ -1,8 +1,8 @@
 import React from "react"
 
 // import Image from "./image"
-import Wave from './wave';
-import Button from './button';
+import Wave from './Wave';
+import Button from './Button';
 
 const Splash = () => (
   <>

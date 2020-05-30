@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import Router from "next/router";
 
-import Layout from "../components/layout";
-import LoginOptions from "../components/login-options";
-import Button from "../components/button";
+import Layout from "../components/Layout";
+import LoginOptions from "../components/LoginOptions";
+import Button from "../components/Button";
 
 import { login, signup, getUsername } from "./api/auth";
 

@@ -10,16 +10,25 @@ class MyApp extends App {
     user: null,
   };
   storeUser = (user) => {
+		// Set state
     this.setState(prevState => ({
 			user: {
 				...prevState.user,
 				...user
 			}
 		}));
+
+		// Set localstorage
+		// ...
   };
   userExists = () => {
     return !!this.state.user;
-  };
+	};
+	componentDidMount() {
+		if (!this.state.user) {
+
+		}
+	}
   render() {
     const { Component, pageProps } = this.props;
     return (

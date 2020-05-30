@@ -1,0 +1,30 @@
+.dashboard-container {
+	// @include content-container;
+
+	height: 100vh;
+}
+
+.dashboard {
+	
+
+	&__nav {
+		&__content {
+			@include content-container;
+
+			display: flex;
+			justify-content: space-around;
+		}
+		
+
+		
+		padding: 1rem 0;
+		background-color: white;
+		border-bottom: 1px solid $light-grey-2;
+	}
+
+	&__main {
+		&__content {
+			@include content-container;
+		}
+	}
+}

@@ -1,7 +1,7 @@
 import React from "react"
 
-import Wave from "./wave"
-import Button from './button';
+import Wave from "./Wave"
+import Button from './Button';
 
 const Arguments = () => (
   <div className="container arguments">

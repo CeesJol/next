@@ -1,53 +1,7 @@
 .userheader {
-	position: relative;
-	background-color: white;
-	border-bottom: 1px solid $light-grey-2;
-	width: 100%;
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	z-index: 1;
-
-	
-	
-	&__content {
-		@include content-container;
-
-		display: flex;
-	align-items: center;
-	justify-content: space-between;
-
-	// This centering junk is necessary because of position absolute
-	left: 0; 
-	right: 0;
-	}
-
-	&__title {
-		margin: 0;
-		font-weight: 500;
-		text-decoration: none;
-		color: white;
-	}
-
-	h3, h4 {
-		font-size: 2rem;
-		padding: 0;
-	}
-
-	&__right a {
-		font-weight: 300;
-	}
-
-	* {
-		color: black;
-	}
-
-	&--transparent {
-		position: absolute;
-		background-color: transparent;
-		border: none;
-
-		* {
-			color: white;
-		}
-	}
+  // UserHeader component uses both 'header' and 'userheader' class names
+  h3,
+  h4 {
+    font-size: 2rem;
+  }
 }
