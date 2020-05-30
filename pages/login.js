@@ -21,9 +21,12 @@ export default function Login() {
       (res) => {
         setStatus("Login succeeded!");
         storeUser({
+					id: res.instance.value.id,
           secret: res.secret,
-        });
+				});
+				console.log('res', res);
         getUsername(email).then((data) => {
+					console.log('data', data)
           storeUser({
             username: data.userByEmail.username,
             posts: data.userByEmail.posts,

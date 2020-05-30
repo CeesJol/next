@@ -3,7 +3,8 @@ type Field {
 }
 
 type Post {
-	title: String!
+	imageUrl: String!
+	productUrl: String!
 	user: User
 }
 

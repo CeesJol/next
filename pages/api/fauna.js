@@ -22,7 +22,8 @@ export const myFunction = async () => {
 				username
 				posts {
 					data {
-						title
+						imageUrl
+						productUrl
 					}
 				}
 			}
@@ -51,7 +52,8 @@ export const getUser = async (username) => {
 			username
 			posts {
 				data {
-					title
+					imageUrl
+					productUrl
 				}
 			}
 		}

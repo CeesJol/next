@@ -1,59 +1,49 @@
 .splash {
-	@include splash-height;
-	@include gradient;
+  @include splash-height;
+  @include gradient;
+  display: flex;
+  align-items: center;
 
-		display: flex;
-		align-items: center;
+  &__content {
+    @include content-container;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    color: white;
 
-	&__content {
-		@include content-container;
+    &--title {
+      display: block;
+      line-height: 1;
+      padding-bottom: 2rem;
+    }
+  }
 
-		display: flex;
-		justify-content: space-between;
-		width: 100%;
-		position: relative;
-		color: white;
-
-		&--title {
-			display: block;
-			line-height: 1;
-			padding-bottom: 2rem;
-		}
-	}
-
-	&__left {
-		@media (max-width: $desktop-breakpoint) {
-			width: 100%;
-			max-width: 50rem;
-
-			margin-left: auto;
-			margin-right: auto;
-
-			text-align: center;
-		}
-
-		@media (min-width: $desktop-breakpoint) {
-			width: 30rem;
-			margin-right: 5rem;
-		}
-
+  &__left {
+		width: 30rem;
+    margin-right: 5rem;
 		height: auto;
-	}
+		
+    @media (max-width: $desktop-breakpoint) {
+      width: 100%;
+      max-width: 50rem;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+  }
 
-	&__right {
-		@media (max-width: $desktop-breakpoint) {
-			display: none;
-		}
-
-		width: 40rem;
+  &__right {
+    width: 40rem;
 		height: auto;
+		
+		@media (max-width: $desktop-breakpoint) {
+      display: none;
+    }
 
-		img {
-			width: 100%;
-			height: 100%;
-		}
-	}
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
-
-
-

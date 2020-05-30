@@ -18,6 +18,10 @@
 	transition: 0.3s;
 	font-size: $font-size-default;
 
+	&--shadow {
+		@include shadow;
+	}
+
 	&:hover {
 		background-color: lighten($light-green, 7%);
 	}

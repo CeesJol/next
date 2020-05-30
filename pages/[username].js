@@ -35,7 +35,7 @@ export default function User() {
 
     if (posts.length > 0)
       return posts.map((post, i) => (
-        <Post key={i}>asfd</Post>
+        <Post key={i} imageUrl={post.imageUrl} productUrl={post.productUrl} >asfd</Post>
       ));
     return <div>Nothing to see here</div>;
   }
