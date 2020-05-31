@@ -24,15 +24,13 @@ export default function Login() {
           id: res.instance.value.id,
           secret: res.secret,
         });
-        console.log("res", res);
         getUsername(email).then((data) => {
-          console.log("data", data);
           storeUser({
             username: data.userByEmail.username,
             posts: data.userByEmail.posts,
-          });
+					});
+					Router.push("/dashboard");
         });
-        Router.push("/dashboard");
       },
       (err) => {
         setStatus(`Login failed: ${err}`);

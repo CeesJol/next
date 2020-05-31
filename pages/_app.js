@@ -35,7 +35,7 @@ class MyApp extends App {
     localStorage.removeItem("user");
   };
   userExists = () => {
-    return !!this.state.user;
+    return this.state.user != null;
   };
   componentDidMount() {
     if (this.state.user == null) {

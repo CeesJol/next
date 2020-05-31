@@ -5,7 +5,7 @@ import UserContext from "../contexts/userContext";
 const Header = ({ transparentHeader = false }) => {
   const { user, userExists } = useContext(UserContext);
   useEffect(() => {
-    // console.log('header user', user)
+
   });
 
   return (
