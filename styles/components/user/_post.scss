@@ -1,33 +1,33 @@
 // Lots of code here so each image has equal width and height with just css.
 // Source https://codepen.io/ItScofield/pen/PNVZoQ
 
-#posts-container .post:not(:nth-child(3n)) {
-	margin-right: $posts-margin;
+#posts-container a:not(:nth-child(3n)) > .post {
+  margin-right: $posts-margin;
 }
 
 .posts-container {
-	float: left;
+  float: left;
 }
 
 .post {
-	position: relative;
-	width: calc(100% / 3 - 2/3 * #{$posts-margin});
-	height: auto;
-	margin-bottom: $posts-margin;
-	
-	float: left;
-	cursor: pointer;
+  position: relative;
+  width: calc(100% / 3 - 2 / 3 * #{$posts-margin});
+  height: auto;
+  margin-bottom: $posts-margin;
 
-	img {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
-	}
+  float: left;
+  cursor: pointer;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
 }
 
 .post:before {
-	content: "";
+  content: "";
   display: block;
   padding-top: 100%;
 }

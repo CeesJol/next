@@ -1,4 +1,4 @@
-import { getUser } from "./api/fauna";
+import { getUserPosts } from "./api/fauna";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import UserLayout from "../components/user/UserLayout";
@@ -13,7 +13,7 @@ export default function User() {
   useEffect(() => {
     if (username && !data && !error) {
       console.log(`Req for ${username}`);
-      getUser(username).then(
+      getUserPosts(username).then(
         (data) => {
           setData(data);
         },
@@ -35,7 +35,9 @@ export default function User() {
 
     if (posts.length > 0)
       return posts.map((post, i) => (
-        <Post key={i} imageUrl={post.imageUrl} productUrl={post.productUrl} >asfd</Post>
+        <Post key={i} imageUrl={post.imageUrl} productUrl={post.productUrl}>
+          asfd
+        </Post>
       ));
     return <div>Nothing to see here</div>;
   }
@@ -44,7 +46,7 @@ export default function User() {
     <UserLayout name={username}>
       <div className="usercontainer">
         <div className="user">
-					<p>Press any image to learn more</p>
+          <p>Press any image to learn more</p>
           <div id="posts-container">{drawItems()}</div>
         </div>
       </div>

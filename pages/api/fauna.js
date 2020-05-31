@@ -7,10 +7,10 @@ const secret = process.env.FAUNADB_SECRET_KEY;
  * Otherwise return the data
  */
 function getData(data) {
-	if (data.errors) {
-		console.log(data.errors);
-		return -1;
-	}
+  if (data.errors) {
+    console.log(data.errors);
+    return -1;
+  }
   if (!data || data.errors) return -1;
   return data.data;
 }
@@ -29,7 +29,7 @@ export const myFunction = async () => {
 			}
 		}
 	}`;
-	const size = 100;
+  const size = 100;
   const data = await useFetch(process.env.FAUNADB_GRAPHQL_ENDPOINT, {
     method: "POST",
     headers: {
@@ -46,7 +46,7 @@ export const myFunction = async () => {
   return getData(data);
 };
 
-export const getUser = async (username) => {
+export const getUserPosts = async (username) => {
   const query = `query FindAUserByID {
 		user(username: "${username}") {
 			username
@@ -58,7 +58,39 @@ export const getUser = async (username) => {
 			}
 		}
 	}`;
-	const size = 100;
+  const size = 100;
+  const data = await useFetch(process.env.FAUNADB_GRAPHQL_ENDPOINT, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${secret}`,
+      "Content-type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query,
+      variables: { size },
+    }),
+  });
+
+  return getData(data);
+};
+
+export const createPost = async (user) => {
+  const query = `mutation CreatePost {
+		createPost(data: {
+			imageUrl: "https://www.gaia.be/sites/default/files/styles/news_header/public/news/images/lonely_puppy_1024_0.jpg?itok=KHApZ5IF"
+			productUrl: "https://example.com"
+			user: { connect: "${user.id}" }
+		}) {
+			imageUrl
+			productUrl
+			user {
+				username
+			}
+		}
+	}`;
+
+  const size = 100;
   const data = await useFetch(process.env.FAUNADB_GRAPHQL_ENDPOINT, {
     method: "POST",
     headers: {

@@ -13,7 +13,7 @@ export default function Login() {
   const [status, setStatus] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, userExists, storeUser } = useContext(UserContext);
+  const { user, userExists, storeUser, getUser } = useContext(UserContext);
   const handleLogin = (event) => {
     if (event) event.preventDefault();
     setStatus("Authenticating...");
@@ -21,12 +21,12 @@ export default function Login() {
       (res) => {
         setStatus("Login succeeded!");
         storeUser({
-					id: res.instance.value.id,
+          id: res.instance.value.id,
           secret: res.secret,
-				});
-				console.log('res', res);
+        });
+        console.log("res", res);
         getUsername(email).then((data) => {
-					console.log('data', data)
+          console.log("data", data);
           storeUser({
             username: data.userByEmail.username,
             posts: data.userByEmail.posts,
@@ -65,37 +65,39 @@ export default function Login() {
   });
 
   return (
-        <div className="login">
-          <div className="login__box">
-						<div className="login__box__content">
-            <form>
-							<h4 className="login__box--title">Program name</h4>
-							<h4 className="login__box--subtitle">Create your Program name account</h4>
-              <label htmlFor="email">Email</label>
-              <input
-                type="text"
-                id="email"
-                name="email"
-                value={email}
-                onChange={handleChangeEmail}
-              />
+    <div className="login">
+      <div className="login__box">
+        <div className="login__box__content">
+          <form>
+            <h4 className="login__box--title">Program name</h4>
+            <h4 className="login__box--subtitle">
+              Create your Program name account
+            </h4>
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleChangeEmail}
+            />
 
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={handleChangePassword}
-              />
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handleChangePassword}
+            />
 
-              {status && <p>Status: {status}</p>}
+            {status && <p>Status: {status}</p>}
 
-              <Button fn={handleLogin} text="Log in" />
-              <Button fn={handleSignUp} text="Sign up" />
-            </form>
-						</div>
-          </div>
+            <Button fn={handleLogin} text="Log in" />
+            <Button fn={handleSignUp} text="Sign up" />
+          </form>
         </div>
+      </div>
+    </div>
   );
 }
