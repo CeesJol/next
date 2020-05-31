@@ -37,22 +37,8 @@
     &--subtitle {
       font-weight: 300;
     }
-  }
-
-  label {
-    font-size: $font-size-small;
-  }
-
-  input {
-    display: block;
-    border: 1px solid rgb(220, 225, 230);
-    font-size: $font-size-default;
-    border-radius: 2px;
-    width: 100%;
-		padding: 1rem;
-		margin-bottom: 1rem;
-  }
-
+	}
+	
   .button {
     width: 100%;
 		margin-top: 1rem;

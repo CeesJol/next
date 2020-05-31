@@ -75,11 +75,11 @@ export const getUserPosts = async (username) => {
   return getData(data);
 };
 
-export const createPost = async (user) => {
+export const createPost = async (user, productUrl, imageUrl) => {
   const query = `mutation CreatePost {
 		createPost(data: {
-			imageUrl: "https://www.gaia.be/sites/default/files/styles/news_header/public/news/images/lonely_puppy_1024_0.jpg?itok=KHApZ5IF"
-			productUrl: "https://example.com"
+			imageUrl: "${imageUrl}"
+			productUrl: "${productUrl}"
 			user: { connect: "${user.id}" }
 		}) {
 			imageUrl

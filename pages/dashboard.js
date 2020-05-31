@@ -10,12 +10,24 @@ import { createPost } from "./api/fauna";
 import UserContext from "../contexts/userContext";
 
 export default function Dashboard() {
+	const [productUrl, setProductUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const { userExists, getUser } = useContext(UserContext);
   useEffect(() => {
     if (!userExists()) {
       Router.push("/login");
     }
-  });
+	});
+	const handleChangeProductUrl = (event) => {
+    setProductUrl(event.target.value);
+  };
+  const handleChangeImageUrl = (event) => {
+    setImageUrl(event.target.value);
+	};
+	const handleCreate = (event) => {
+		if (event) event.preventDefault();
+		createPost(getUser(), productUrl, imageUrl)
+	}
   return (
     <>
       {userExists() && (
@@ -32,10 +44,37 @@ export default function Dashboard() {
               </div>
               <div className="dashboard__main">
                 <div className="dashboard__main__content">
-                  <Button
-                    text="Add new product"
-                    fn={() => createPost(getUser())}
-                  />
+                  <div className="dashboard__create">
+                    <form>
+                      <h4 className="dashboard__create--title">
+                        Add a product
+                      </h4>
+                      <label>Product URL</label>
+                      <input
+                        type="text"
+                        id="productUrl"
+                        name="productUrl"
+                        value={productUrl}
+                        onChange={handleChangeProductUrl}
+                      />
+
+                      <label>Image URL</label>
+                      <input
+                        type="text"
+                        id="imageUrl"
+                        name="imageUrl"
+                        value={imageUrl}
+                        onChange={handleChangeImageUrl}
+                      />
+
+                      {status && <p>Status: {status}</p>}
+
+                      <Button
+                        text="Add new product"
+                        fn={handleCreate}
+                      />
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
