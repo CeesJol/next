@@ -49,7 +49,6 @@ export default function Edit(props) {
     const post = props.post;
     setProductUrl(post.productUrl);
     setImageUrl(post.imageUrl);
-    console.log("fn", props.fn);
   }, []);
   return (
     <>

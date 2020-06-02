@@ -29,7 +29,7 @@ export default () => {
 				// Update user locally
 				storeUser({
 					username: data.updateUser.username,
-					posts: data.updateUser.posts,
+					email: data.updateUser.email,
 				});
 
 				setStatus('Updated successfully!');

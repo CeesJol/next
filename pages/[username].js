@@ -25,27 +25,30 @@ export default function User() {
   });
 
   function drawItems() {
-		console.log('data', data)
-    if (!data) return <div>Loading...</div>;
-    if (error || data === -1) return <div>Failed to load</div>;
-    if (!data.user) return <div>404 - user not found</div>;
+    if (!data) return <p>Loading...</p>;
+    if (error || data === -1) return <p>Failed to load</p>;
+    if (!data.user) return <p>404 - user not found</p>;
 
     const posts = data.user.posts.data;
 
     if (posts.length > 0)
-      return posts.map((post, i) => (
-        <Post key={i} imageUrl={post.imageUrl} productUrl={post.productUrl}>
-          asfd
-        </Post>
-      ));
-    return <div>Nothing to see here</div>;
+      return (
+        <>
+          <p>Press any image to learn more</p>
+          {posts.map((post, i) => (
+            <Post key={i} imageUrl={post.imageUrl} productUrl={post.productUrl}>
+              asfd
+            </Post>
+          ))}
+        </>
+      );
+    return <p>Nothing to see here</p>;
   }
 
   return (
     <UserLayout name={username}>
       <div className="usercontainer">
         <div className="user">
-          <p>Press any image to learn more</p>
           <div id="posts-container">{drawItems()}</div>
         </div>
       </div>

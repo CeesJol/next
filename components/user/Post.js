@@ -1,14 +1,20 @@
 import React from "react";
-import Link from "next/link";
 
-const Post = ({ imageUrl, productUrl, id }) => {
-  const post = (
+const Post = ({ imageUrl, productUrl, post, handleClick }) => {
+  const thePost = (
     <div className="post">
       <img src={imageUrl} />
     </div>
-  );
-  if (id) return post;
-  return <a href={productUrl}>{post}</a>;
+	);
+	// Dashboard version
+  if (post)
+    return (
+      <a onClick={(e) => handleClick(e, post)} key={post._id}>
+        {thePost}
+      </a>
+		);
+	// Live version
+  return <a href={productUrl}>{thePost}</a>;
 };
 
 export default Post;

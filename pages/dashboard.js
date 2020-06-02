@@ -41,7 +41,6 @@ export default function Dashboard(props) {
   }
   function handleClick(e, post) {
     e.preventDefault();
-    console.log("The link was clicked.", post);
     setEditingPost(post);
   }
   function handleMutation() {

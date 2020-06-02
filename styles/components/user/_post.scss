@@ -1,7 +1,7 @@
 // Lots of code here so each image has equal width and height with just css.
 // Source https://codepen.io/ItScofield/pen/PNVZoQ
 
-#posts-container a:not(:nth-child(3n)) > .post {
+#posts-container > a:not(:nth-child(3n+1)) > .post {
   margin-right: $posts-margin;
 }
 

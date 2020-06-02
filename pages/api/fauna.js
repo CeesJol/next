@@ -1,9 +1,12 @@
 import executeQuery from "../../lib/executeQuery";
 
+/** |----------------------------
+ *  | GET POSTS BY USERNAME
+ *  |----------------------------
+ */
 export const getUserPosts = async (username) => {
-  return executeQuery(`query FindAUserByID {
+  return executeQuery(`query FindPostsByID {
 		user(username: "${username}") {
-			username
 			posts {
 				data {
 					_id
@@ -15,6 +18,10 @@ export const getUserPosts = async (username) => {
 	}`);
 };
 
+/** |----------------------------
+ *  | GET USERNAME BY EMAIL
+ *  |----------------------------
+ */
 export const getUserByEmail = async (email) => {
   return executeQuery(`query FindAUserByEmail {
 		userByEmail(email: "${email}") {
@@ -23,10 +30,13 @@ export const getUserByEmail = async (email) => {
 	}`);
 };
 
+/** |----------------------------
+ *  | GET POSTS BY EMAIL
+ *  |----------------------------
+ */
 export const getUserPostsByEmail = async (email) => {
-  return executeQuery(`query FindAUserByEmail {
+  return executeQuery(`query FindPostsByEmail {
 		userByEmail(email: "${email}") {
-			username
 			posts {
 				data {
 					_id
@@ -38,6 +48,10 @@ export const getUserPostsByEmail = async (email) => {
 	}`);
 };
 
+/** |----------------------------
+ *  | CREATE POST
+ *  |----------------------------
+ */
 export const createPost = async (user, productUrl, imageUrl) => {
   return executeQuery(`mutation CreatePost {
 		createPost(data: {
@@ -51,6 +65,10 @@ export const createPost = async (user, productUrl, imageUrl) => {
 	}`);
 };
 
+/** |----------------------------
+ *  | UPDATE POST
+ *  |----------------------------
+ */
 export const updatePost = async (id, productUrl, imageUrl) => {
   return executeQuery(`mutation UpdatePost {
 		updatePost(id: "${id}", data:{
@@ -63,8 +81,12 @@ export const updatePost = async (id, productUrl, imageUrl) => {
 	}`);
 };
 
+/** |----------------------------
+ *  | DELETE POST
+ *  |----------------------------
+ */
 export const deletePost = async (id) => {
-  return executeQuery(`mutation deletePost {
+  return executeQuery(`mutation DeletePost {
 		deletePost(id: "${id}") {
 			imageUrl
 			productUrl
@@ -72,7 +94,10 @@ export const deletePost = async (id) => {
 	}`);
 };
 
-// User stuff below!
+/** |----------------------------
+ *  | UPDATE USER
+ *  |----------------------------
+ */
 export const updateUser = async (id, username, email) => {
   return executeQuery(`mutation UpdateUser {
 		updateUser(id: "${id}", data:{
@@ -85,6 +110,10 @@ export const updateUser = async (id, username, email) => {
 	}`);
 };
 
+/** |----------------------------
+ *  | GET USER BY ID
+ *  |----------------------------
+ */
 export const readUser = async (id) => {
   return executeQuery(`query FindAUserByID {
 		findUserByID(id: "${id}") {

@@ -4,36 +4,37 @@ import Post from "../../components/user/Post";
 export default (props) => {
   function drawItems() {
     const data = props.data;
-		const error = props.error;
-		
-		console.log('props', props)
+    const error = props.error;
 
-    if (!data) return <div>Loading...</div>;
-    if (error || data === -1) return <div>Failed to load</div>;
-    if (!data.userByEmail) return <div>404 - user not found</div>;
+    if (!data) return <p>Loading...</p>;
+    if (error || data === -1) return <p>Failed to load</p>;
+    if (!data.userByEmail) return <p>404 - user not found</p>;
 
     const posts = data.userByEmail.posts.data;
 
     if (posts.length > 0)
-      return posts.map((post, i) => (
-        <a onClick={(e) => props.handleClick(e, post)} key={post._id}>
-          <Post
-            key={i}
-            imageUrl={post.imageUrl}
-            productUrl={post.productUrl}
-            id={post._id}
-          >
-            asfd
-          </Post>
-        </a>
-      ));
-    return <div>Nothing to see here</div>;
+      return (
+        <>
+          <p>Click on any product to edit it</p>
+          {posts.map((post, i) => (
+            <Post
+              key={i}
+              imageUrl={post.imageUrl}
+              productUrl={post.productUrl}
+              post={post}
+              handleClick={props.handleClick}
+            >
+              asfd
+            </Post>
+          ))}
+        </>
+      );
+    return <p>Nothing to see here</p>;
   }
 
   return (
     <div className="dashboard__products">
       <h4>Your products</h4>
-			<p>Click on a product to edit or delete it</p>
       <div id="posts-container">{drawItems()}</div>
     </div>
   );

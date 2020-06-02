@@ -4,6 +4,10 @@ import validate from "../../lib/validate";
 const secret = process.env.FAUNADB_SECRET_KEY;
 const server = new faunadb.Client({ secret });
 
+/** |----------------------------
+ *  | AUTHENTICATE
+ *  |----------------------------
+ */
 export const login = (email, password) => {
   const validationError = validate(email, password);
   if (validationError) return Promise.reject(validationError);
@@ -11,14 +15,22 @@ export const login = (email, password) => {
     q.Login(q.Match(q.Index("userByEmail"), email), {
       password,
     })
-  );
+  )
 };
 
+/** |----------------------------
+ *  | LOG OUT
+ *  |----------------------------
+ */
 export const logout = (user) => {
   const client = new faunadb.Client({ secret: user.secret });
   return client.query(q.Logout(false));
 };
 
+/** |----------------------------
+ *  | CREATE ACCOUNT
+ *  |----------------------------
+ */
 export const signup = (email, password) => {
   const validationError = validate(email, password);
   if (validationError) return Promise.reject(validationError);
