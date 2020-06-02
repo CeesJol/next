@@ -5,8 +5,8 @@
 }
 
 .dashboard {
-	h4 {
-		padding-bottom: 1.5rem;
+	form {
+		padding-top: 1.5rem;
 	}
 
 	.button {
@@ -14,16 +14,37 @@
 	}
 
 	&__nav {
+		background-color: white;
+		border-bottom: 1px solid $light-grey-2;
+
 		&__content {
 			@include content-container;
 
 			display: flex;
 			justify-content: space-around;
 		}
-		
-		padding: 1rem 0;
-		background-color: white;
-		border-bottom: 1px solid $light-grey-2;
+
+		&--item {
+			position: relative;
+			padding: 1rem 1rem;
+			top: 1px;
+			cursor: pointer;
+			transition: 0.3s;
+			border-bottom: 1px solid rgba(0,0,0,0);
+
+			&:hover {
+				border-bottom: 1px solid grey;
+			}
+		}
+
+		&--item-selected {
+			border-bottom: 1px solid black;
+
+			// Ignore hover effect on selected item
+			&:hover {
+				border-bottom: 1px solid black;
+			}
+		}
 	}
 
 	&__main {
@@ -32,29 +53,12 @@
 		}
 	}
 
-	&__create {
+	&__create, &__preview, &__products, &__settings {
 		background-color: white;
 		border: 1px solid $light-grey-2;
 		border-radius: 3px;
 		padding: 2rem;
 		margin: 2rem 0;
-	}
-
-	&__preview {
-		background-color: white;
-		border: 1px solid $light-grey-2;
-		border-radius: 3px;
-		padding: 2rem;
-		margin: 2rem 0;
-		overflow: auto; 
-	}
-
-	&__products {
-		background-color: white;
-		border: 1px solid $light-grey-2;
-		border-radius: 3px;
-		padding: 2rem;
-		margin: 2rem 0;
-		overflow: auto; 
+		overflow: auto;
 	}
 }

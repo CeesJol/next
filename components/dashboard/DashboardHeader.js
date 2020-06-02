@@ -9,8 +9,6 @@ const DashboardHeader = () => {
   const { userExists, getUser, clearUser } = useContext(UserContext);
   const handleLogout = () => {
     logout(getUser()).then((data) => {
-      if (data == true) {
-      }
       clearUser();
       Router.push("/login");
     });
@@ -20,15 +18,13 @@ const DashboardHeader = () => {
       <div className="header__content">
         <div className="header__left">
           <h3>
-            <Link href="/dashboard">
-              <a className="header__title">
-                {userExists() ? getUser().username : "Loading..."}
-              </a>
-            </Link>
+						<a className="header__title" onClick={Router.reload}>
+							{userExists() ? getUser().username : "Loading..."}
+						</a>
           </h3>
         </div>
         <div className="header__right">
-          <button onClick={handleLogout}>Log out</button>
+          <a onClick={handleLogout}>Log out</a>
         </div>
       </div>
     </header>

@@ -18,11 +18,9 @@ export default (props) => {
       if (!post) return <div>Something went wrong</div>;
 
       return (
-        <a onClick={(e) => props.handleClick(e, post._id)} key={post._id}>
-          <Post imageUrl={post.imageUrl} productUrl={post.productUrl}>
-            asfd
-          </Post>
-        </a>
+				<Post imageUrl={post.imageUrl} productUrl={post.productUrl}>
+					asfd
+				</Post>
       );
     }
     return <div>Nothing to see here</div>;
@@ -31,6 +29,7 @@ export default (props) => {
   return (
     <div className="dashboard__preview">
       <h4>Preview</h4>
+			<p>Preview of the product</p>
       {drawItem(props.editingPost)}
     </div>
   );

@@ -24,16 +24,16 @@ export default function Add(props) {
     setImageUrl(event.target.value);
   };
   const handleCreate = async (event) => {
-		if (event) event.preventDefault();
-		await createPost(getUser(), productUrl, imageUrl);
+    if (event) event.preventDefault();
+    await createPost(getUser(), productUrl, imageUrl);
 
-		// Communicate refresh to Dashboard (parent)
-		props.fn();
-	}
+    // Communicate refresh to Dashboard (parent)
+    props.fn();
+  };
   return (
     <div className="dashboard__create">
+      <h4 className="dashboard__create--title">Add a product</h4>
       <form>
-        <h4 className="dashboard__create--title">Add a product</h4>
         <label>Product URL</label>
         <input
           type="text"

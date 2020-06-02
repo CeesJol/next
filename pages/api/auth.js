@@ -52,6 +52,7 @@ export const getUsername = async (email) => {
   const query = `query GetUser {
 		userByEmail(email: "${email}") {
 			username
+			email
 			posts {
 				data {
 					imageUrl

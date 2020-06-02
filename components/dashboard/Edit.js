@@ -54,14 +54,14 @@ export default function Edit(props) {
   useEffect(() => {
     const post = props.post;
     setProductUrl(post.productUrl);
-		setImageUrl(post.imageUrl);
-		console.log('fn', props.fn);
+    setImageUrl(post.imageUrl);
+    console.log("fn", props.fn);
   }, []);
   return (
     <>
       <div className="dashboard__create">
+        <h4 className="dashboard__create--title">Edit a product</h4>
         <form>
-          <h4 className="dashboard__create--title">Edit a product</h4>
           <label>Product URL</label>
           <input
             type="text"

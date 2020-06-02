@@ -31,6 +31,7 @@ export default (props) => {
   return (
     <div className="dashboard__products">
       <h4>Your products</h4>
+			<p>Click on a product to edit or delete it</p>
       <div id="posts-container">{drawItems()}</div>
     </div>
   );

@@ -1,23 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import Link from "next/link";
 import Router from "next/router";
-
 import DashboardHeader from "../components/dashboard/DashboardHeader";
 import Add from "../components/dashboard/Add";
 import Edit from "../components/dashboard/Edit";
 import Product from "../components/dashboard/Product";
 import Products from "../components/dashboard/Products";
-
-import { createPost } from "./api/fauna";
-
+import Settings from "../components/dashboard/Settings";
 import UserContext from "../contexts/userContext";
-
 import { getUserPosts } from "./api/fauna";
-import Post from "../components/user/Post";
 
 export default function Dashboard(props) {
   const [data, setData] = useState(false);
   const [error, setError] = useState(false);
+  const [nav, setNav] = useState(0); // 0 = main, 1 = settings
   const [editingPost, setEditingPost] = useState(-1);
 
   const { userExists, getUser } = useContext(UserContext);
@@ -35,7 +30,7 @@ export default function Dashboard(props) {
     console.log(`Req for ${user.username}`);
     getUserPosts(user.username).then(
       (data) => {
-        console.log(data);
+        console.log('getposts data', data);
         setData(data);
       },
       (error) => {
@@ -62,33 +57,50 @@ export default function Dashboard(props) {
             <div className="dashboard">
               <div className="dashboard__nav">
                 <div className="dashboard__nav__content">
-                  <div className="dashboard__nav--item">Products</div>
-                  <div className="dashboard__nav--item">Settings</div>
-                  {/* <div className="dashboard__nav--item">hi there3</div> */}
+                  <div
+                    className={
+                      "dashboard__nav--item " +
+                      (nav == 0 && " dashboard__nav--item-selected")
+                    }
+                    onClick={() => setNav(0)}
+                  >
+                    Products
+                  </div>
+                  <div
+                    className={
+                      "dashboard__nav--item " +
+                      (nav == 1 && " dashboard__nav--item-selected")
+                    }
+                    onClick={() => setNav(1)}
+                  >
+                    Settings
+                  </div>
                 </div>
               </div>
               <div className="dashboard__main">
                 <div className="dashboard__main__content">
-                  {editingPost !== -1 ? (
-                    <>
-                      <Edit fn={handleMutation} post={editingPost} />
-                      <Product
-                        data={data}
-                        error={error}
-                        handleClick={handleClick}
-                        editingPost={editingPost}
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <Add fn={getPosts} />
-                      <Products
-                        data={data}
-                        error={error}
-                        handleClick={handleClick}
-                      />
-                    </>
-                  )}
+                  {nav == 0 &&
+                    (editingPost !== -1 ? (
+                      <>
+                        <Edit fn={handleMutation} post={editingPost} />
+                        <Product
+                          data={data}
+                          error={error}
+                          handleClick={handleClick}
+                          editingPost={editingPost}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <Add fn={getPosts} />
+                        <Products
+                          data={data}
+                          error={error}
+                          handleClick={handleClick}
+                        />
+                      </>
+                    ))}
+                  {nav == 1 && <Settings />}
                 </div>
               </div>
             </div>

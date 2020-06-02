@@ -22,12 +22,13 @@ export default function Login() {
         setStatus("Login succeeded!");
         storeUser({
           id: res.instance.value.id,
-          secret: res.secret,
+					secret: res.secret,
+					email
         });
         getUsername(email).then((data) => {
           storeUser({
             username: data.userByEmail.username,
-            posts: data.userByEmail.posts,
+            // posts: data.userByEmail.posts,
 					});
 					Router.push("/dashboard");
         });
