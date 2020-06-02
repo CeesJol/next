@@ -54,6 +54,12 @@ class MyApp extends App {
         <div>
           <Head>
             <title>Project name</title>
+						<link
+            rel="preload"
+            href="/fonts/Roboto-Regular.ttf"
+            as="font"
+            crossOrigin=""
+          />
           </Head>
         </div>
         <UserContext.Provider

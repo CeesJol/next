@@ -27,12 +27,13 @@ export default function Dashboard(props) {
 		if (getUser() && getUser().username && !data && !error) {
 			getPosts();
 		}
-	});
+	}, [data, error]);
 	function getPosts() {
 		const user = getUser();
 		console.log(`Req for ${user.username}`);
 		getUserPosts(user.username).then(
 			(data) => {
+				console.log(data)
 				setData(data);
 			},
 			(error) => {
@@ -42,7 +43,7 @@ export default function Dashboard(props) {
 	}
 	function drawItems() {
 		if (!data) return <div>Loading...</div>;
-    if (error || data === -1) return <div>Failed to load</div>;
+		if (error || data === -1) return <div>Failed to load</div>;
     if (!data.user) return <div>404 - user not found</div>;
 
     const posts = data.user.posts.data;

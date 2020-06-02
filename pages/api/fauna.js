@@ -1,19 +1,7 @@
 import useFetch from "../../lib/useFetch";
+import getData from "../../lib/getData"
 
 const secret = process.env.FAUNADB_SECRET_KEY;
-
-/**
- * If no data is returned, or the server returns an error, return -1
- * Otherwise return the data
- */
-function getData(data) {
-  if (data.errors) {
-    console.log(data.errors);
-    return -1;
-  }
-  if (!data || data.errors) return -1;
-  return data.data;
-}
 
 export const myFunction = async () => {
   const query = `query AllUsers {
