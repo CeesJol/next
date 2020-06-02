@@ -1,16 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import Link from "next/link";
-import Router from "next/router";
 
 import Button from "../Button";
 
 import { updateUser, readUser } from "../../pages/api/fauna";
 
 import UserContext from "../../contexts/userContext";
-
-import { getUserPosts } from "../../pages/api/fauna";
-// import { useRouter } from "next/router";
-import Post from "../user/Post";
 
 export default () => {
 	const [username, setUsername] = useState("");

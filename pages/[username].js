@@ -25,6 +25,7 @@ export default function User() {
   });
 
   function drawItems() {
+		console.log('data', data)
     if (!data) return <div>Loading...</div>;
     if (error || data === -1) return <div>Failed to load</div>;
     if (!data.user) return <div>404 - user not found</div>;

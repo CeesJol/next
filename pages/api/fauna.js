@@ -34,6 +34,21 @@ export const getUserPosts = async (username) => {
 	}`);
 };
 
+export const getUserPostsByEmail = async (email) => {
+  return executeQuery(`query FindAUserByEmail {
+		userByEmail(email: "${email}") {
+			username
+			posts {
+				data {
+					_id
+					productUrl
+					imageUrl
+				}
+			}
+		}
+	}`);
+};
+
 export const createPost = async (user, productUrl, imageUrl) => {
   return executeQuery(`mutation CreatePost {
 		createPost(data: {

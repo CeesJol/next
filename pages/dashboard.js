@@ -7,7 +7,7 @@ import Product from "../components/dashboard/Product";
 import Products from "../components/dashboard/Products";
 import Settings from "../components/dashboard/Settings";
 import UserContext from "../contexts/userContext";
-import { getUserPosts } from "./api/fauna";
+import { getUserPostsByEmail } from "./api/fauna";
 
 export default function Dashboard(props) {
   const [data, setData] = useState(false);
@@ -21,19 +21,20 @@ export default function Dashboard(props) {
       Router.push("/login");
     }
 
-    if (getUser() && getUser().username && !data && !error) {
+    if (getUser() && getUser().email && !data && !error) {
       getPosts();
     }
   }, [data, error]);
   function getPosts() {
     const user = getUser();
-    console.log(`Req for ${user.username}`);
-    getUserPosts(user.username).then(
+    console.log(`Req for ${user.email}`);
+    getUserPostsByEmail(user.email).then(
       (data) => {
         console.log('getposts data', data);
         setData(data);
       },
       (error) => {
+				console.log('getposts error', error)
         setError(error);
       }
     );
@@ -51,7 +52,6 @@ export default function Dashboard(props) {
     <>
       {userExists() && (
         <div className="dashboard-container">
-          {console.log("yup it rendered")}
           <DashboardHeader />
           <main>
             <div className="dashboard">
