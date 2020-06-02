@@ -1,23 +1,4 @@
-import useFetch from "../../lib/useFetch";
-import getData from "../../lib/getData";
-
-const secret = process.env.FAUNADB_SECRET_KEY;
-
-const executeQuery = async (query) => {
-  const data = await useFetch(process.env.FAUNADB_GRAPHQL_ENDPOINT, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${secret}`,
-      "Content-type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      query,
-    }),
-  });
-
-  return getData(data);
-};
+import executeQuery from "../../lib/executeQuery";
 
 export const getUserPosts = async (username) => {
   return executeQuery(`query FindAUserByID {
@@ -30,6 +11,14 @@ export const getUserPosts = async (username) => {
 					productUrl
 				}
 			}
+		}
+	}`);
+};
+
+export const getUserByEmail = async (email) => {
+  return executeQuery(`query FindAUserByEmail {
+		userByEmail(email: "${email}") {
+			username
 		}
 	}`);
 };

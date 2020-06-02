@@ -5,7 +5,8 @@ import Layout from "../components/Layout";
 import LoginOptions from "../components/LoginOptions";
 import Button from "../components/Button";
 
-import { login, signup, getUsername } from "./api/auth";
+import { login, signup } from "./api/auth";
+import { getUserByEmail } from "./api/fauna";
 
 import UserContext from "../contexts/userContext";
 
@@ -25,10 +26,9 @@ export default function Login() {
 					secret: res.secret,
 					email
         });
-        getUsername(email).then((data) => {
+        getUserByEmail(email).then((data) => {
           storeUser({
             username: data.userByEmail.username,
-            // posts: data.userByEmail.posts,
 					});
 					Router.push("/dashboard");
         });
