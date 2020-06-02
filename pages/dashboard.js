@@ -5,6 +5,8 @@ import Router from "next/router";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
 import Add from "../components/dashboard/Add";
 import Edit from "../components/dashboard/Edit";
+import Product from "../components/dashboard/Product";
+import Products from "../components/dashboard/Products";
 
 import { createPost } from "./api/fauna";
 
@@ -46,90 +48,45 @@ export default function Dashboard(props) {
     console.log("The link was clicked.", post);
     setEditingPost(post);
   }
-  function drawItems() {
-    if (!data) return <div>Loading...</div>;
-    if (error || data === -1) return <div>Failed to load</div>;
-    if (!data.user) return <div>404 - user not found</div>;
-
-    const posts = data.user.posts.data;
-
-    if (posts.length > 0)
-      return posts.map((post, i) => (
-        <a onClick={(e) => handleClick(e, post)} key={post._id}>
-          <Post
-            key={i}
-            imageUrl={post.imageUrl}
-            productUrl={post.productUrl}
-            id={post._id}
-          >
-            asfd
-          </Post>
-        </a>
-      ));
-    return <div>Nothing to see here</div>;
+  function handleMutation() {
+    getPosts();
+    setEditingPost(-1);
   }
-  function drawItem(drawPost) {
-    if (!data) return <div>Loading...</div>;
-    if (error || data === -1) return <div>Failed to load</div>;
-    if (!data.user) return <div>404 - user not found</div>;
-
-    const posts = data.user.posts.data;
-
-    if (posts.length > 0) {
-			// TODO does find work for SEO does it even matter and stuff or am i just bitching
-			const post = posts.find((post) => post._id == drawPost._id);
-			if (!post) return <div>Something went wrong</div>
-			
-      return (
-        <a onClick={(e) => handleClick(e, post._id)} key={post._id}>
-          <Post
-            imageUrl={post.imageUrl}
-            productUrl={post.productUrl}
-            id={post._id}
-          >
-            asfd
-          </Post>
-        </a>
-			);
-    }
-    return <div>Nothing to see here</div>;
-	}
-	function handleMutation() {
-		getPosts(); 
-		setEditingPost(-1)
-	}
   return (
     <>
-      {userExists() && (				
+      {userExists() && (
         <div className="dashboard-container">
+          {console.log("yup it rendered")}
           <DashboardHeader />
           <main>
             <div className="dashboard">
               <div className="dashboard__nav">
                 <div className="dashboard__nav__content">
-                  <div className="dashboard__nav--item">hi there</div>
-                  <div className="dashboard__nav--item">hi there2</div>
-                  <div className="dashboard__nav--item">hi there3</div>
+                  <div className="dashboard__nav--item">Products</div>
+                  <div className="dashboard__nav--item">Settings</div>
+                  {/* <div className="dashboard__nav--item">hi there3</div> */}
                 </div>
               </div>
               <div className="dashboard__main">
                 <div className="dashboard__main__content">
                   {editingPost !== -1 ? (
                     <>
-										<Edit fn={handleMutation} post={editingPost} />
-                      <div className="dashboard__preview">
-											<h4>Preview</h4>
-												{drawItem(editingPost)}
-											</div>
-                      
+                      <Edit fn={handleMutation} post={editingPost} />
+                      <Product
+                        data={data}
+                        error={error}
+                        handleClick={handleClick}
+                        editingPost={editingPost}
+                      />
                     </>
                   ) : (
                     <>
                       <Add fn={getPosts} />
-                      <div className="dashboard__products">
-                        <h4>Your products</h4>
-                        <div id="posts-container">{drawItems()}</div>
-                      </div>
+                      <Products
+                        data={data}
+                        error={error}
+                        handleClick={handleClick}
+                      />
                     </>
                   )}
                 </div>
