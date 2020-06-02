@@ -14,51 +14,93 @@ import { getUserPosts } from "./api/fauna";
 import Post from "../components/user/Post";
 
 export default function Dashboard(props) {
-	const [data, setData] = useState(false);
-	const [error, setError] = useState(false);
-	const [editingPost, setEditingPost] = useState(false);
-	
+  const [data, setData] = useState(false);
+  const [error, setError] = useState(false);
+  const [editingPost, setEditingPost] = useState(-1);
+
   const { userExists, getUser } = useContext(UserContext);
   useEffect(() => {
     if (!userExists()) {
       Router.push("/login");
-		}
-		
-		if (getUser() && getUser().username && !data && !error) {
-			getPosts();
-		}
-	}, [data, error]);
-	function getPosts() {
-		const user = getUser();
-		console.log(`Req for ${user.username}`);
-		getUserPosts(user.username).then(
-			(data) => {
-				console.log(data)
-				setData(data);
-			},
-			(error) => {
-				setError(error);
-			}
-		);
-	}
-	function drawItems() {
-		if (!data) return <div>Loading...</div>;
-		if (error || data === -1) return <div>Failed to load</div>;
+    }
+
+    if (getUser() && getUser().username && !data && !error) {
+      getPosts();
+    }
+  }, [data, error]);
+  function getPosts() {
+    const user = getUser();
+    console.log(`Req for ${user.username}`);
+    getUserPosts(user.username).then(
+      (data) => {
+        console.log(data);
+        setData(data);
+      },
+      (error) => {
+        setError(error);
+      }
+    );
+  }
+  function handleClick(e, post) {
+    e.preventDefault();
+    console.log("The link was clicked.", post);
+    setEditingPost(post);
+  }
+  function drawItems() {
+    if (!data) return <div>Loading...</div>;
+    if (error || data === -1) return <div>Failed to load</div>;
     if (!data.user) return <div>404 - user not found</div>;
 
     const posts = data.user.posts.data;
 
     if (posts.length > 0)
       return posts.map((post, i) => (
-        <Post key={i} imageUrl={post.imageUrl} productUrl={post.productUrl}>
-          asfd
-        </Post>
+        <a onClick={(e) => handleClick(e, post)} key={post._id}>
+          <Post
+            key={i}
+            imageUrl={post.imageUrl}
+            productUrl={post.productUrl}
+            id={post._id}
+          >
+            asfd
+          </Post>
+        </a>
       ));
     return <div>Nothing to see here</div>;
   }
+  function drawItem(drawPost) {
+    if (!data) return <div>Loading...</div>;
+    if (error || data === -1) return <div>Failed to load</div>;
+    if (!data.user) return <div>404 - user not found</div>;
+
+    const posts = data.user.posts.data;
+
+    if (posts.length > 0) {
+			// TODO does find work for SEO does it even matter and stuff or am i just bitching
+			const post = posts.find((post) => post._id == drawPost._id);
+			if (!post) return <div>Something went wrong</div>
+			
+      return (
+        <a onClick={(e) => handleClick(e, post._id)} key={post._id}>
+          <Post
+            imageUrl={post.imageUrl}
+            productUrl={post.productUrl}
+            id={post._id}
+          >
+            asfd
+          </Post>
+        </a>
+			);
+    }
+    return <div>Nothing to see here</div>;
+	}
+	function handleMutation() {
+		getPosts(); 
+		setEditingPost(-1)
+	}
   return (
     <>
-      {userExists() && (
+      {userExists() && (				
         <div className="dashboard-container">
           <DashboardHeader />
           <main>
@@ -72,17 +114,24 @@ export default function Dashboard(props) {
               </div>
               <div className="dashboard__main">
                 <div className="dashboard__main__content">
-									{editingPost ? (
-										<Edit />
-									) : (
-										<Add fn={getPosts} />
-									)}
-									<div className="dashboard__products">
-										<h4>Your products</h4>
-										<div id="posts-container">
-											{drawItems()}
-										</div>
-									</div>
+                  {editingPost !== -1 ? (
+                    <>
+										<Edit fn={handleMutation} post={editingPost} />
+                      <div className="dashboard__preview">
+											<h4>Preview</h4>
+												{drawItem(editingPost)}
+											</div>
+                      
+                    </>
+                  ) : (
+                    <>
+                      <Add fn={getPosts} />
+                      <div className="dashboard__products">
+                        <h4>Your products</h4>
+                        <div id="posts-container">{drawItems()}</div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

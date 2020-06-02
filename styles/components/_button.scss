@@ -13,13 +13,16 @@
 	border-radius: 3px;
 	color: white;
 	padding: 1rem 1.5rem;
-	font-weight: 500;
 	text-transform: uppercase;
 	transition: 0.3s;
 	font-size: $font-size-default;
 
 	&--shadow {
 		@include shadow;
+	}
+
+	a {
+		font-weight: 400;
 	}
 
 	&:hover {

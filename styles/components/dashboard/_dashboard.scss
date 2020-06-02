@@ -40,6 +40,15 @@
 		margin: 2rem 0;
 	}
 
+	&__preview {
+		background-color: white;
+		border: 1px solid $light-grey-2;
+		border-radius: 3px;
+		padding: 2rem;
+		margin: 2rem 0;
+		overflow: auto; 
+	}
+
 	&__products {
 		background-color: white;
 		border: 1px solid $light-grey-2;
