@@ -14,7 +14,7 @@ const Niche = () => (
           </p>
         </div>
         <div className="niche__illustration">
-          <img src="/images/influencer.png" />
+          <img src="/images/undraw_social_influencer_sgsv.svg" />
         </div>
       </div>
     </div>
