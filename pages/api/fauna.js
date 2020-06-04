@@ -26,6 +26,7 @@ export const getUserByEmail = async (email) => {
   return executeQuery(`query FindAUserByEmail {
 		userByEmail(email: "${email}") {
 			username
+			confirmed
 		}
 	}`);
 };

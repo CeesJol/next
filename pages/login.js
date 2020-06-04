@@ -7,6 +7,7 @@ import Button from "../components/Button";
 
 import { login, signup } from "./api/auth";
 import { getUserByEmail } from "./api/fauna";
+import { sendConfirmationEmail } from "./api/confirm";
 
 import UserContext from "../contexts/userContext";
 
@@ -20,15 +21,19 @@ export default function Login() {
     setStatus("Authenticating...");
     login(email, password).then(
       (res) => {
-        setStatus("Login succeeded!");
+				setStatus("Login succeeded!");
+				const id = res.instance.value.id;
         storeUser({
-          id: res.instance.value.id,
+          id,
 					secret: res.secret,
 					email
-        });
+				});
+				sendConfirmationEmail(id); // DELETE ME IM ONLY HERE FOR TESTING
         getUserByEmail(email).then((data) => {
+					console.log('data', data)
           storeUser({
-            username: data.userByEmail.username,
+						username: data.userByEmail.username,
+						confirmed: data.userByEmail.confirmed
 					});
 					Router.push("/dashboard");
         });
@@ -43,7 +48,8 @@ export default function Login() {
     setStatus("Creating account...");
     signup(email, password).then(
       (res) => {
-        handleLogin();
+				handleLogin();
+				sendConfirmationEmail(id);
       },
       (err) => {
         setStatus(`Signup failed: ${err}`);

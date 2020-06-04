@@ -30,11 +30,11 @@ export default function Dashboard(props) {
     console.log(`Req for ${user.email}`);
     getUserPostsByEmail(user.email).then(
       (data) => {
-        console.log('getposts data', data);
+        console.log("getposts data", data);
         setData(data);
       },
       (error) => {
-				console.log('getposts error', error)
+        console.log("getposts error", error);
         setError(error);
       }
     );
@@ -59,7 +59,7 @@ export default function Dashboard(props) {
                   <div
                     className={
                       "dashboard__nav--item " +
-                      (nav == 0 && " dashboard__nav--item-selected")
+                      (nav === 0 && " dashboard__nav--item-selected")
                     }
                     onClick={() => setNav(0)}
                   >
@@ -68,7 +68,7 @@ export default function Dashboard(props) {
                   <div
                     className={
                       "dashboard__nav--item " +
-                      (nav == 1 && " dashboard__nav--item-selected")
+                      (nav === 1 && " dashboard__nav--item-selected")
                     }
                     onClick={() => setNav(1)}
                   >
@@ -76,8 +76,14 @@ export default function Dashboard(props) {
                   </div>
                 </div>
               </div>
+
               <div className="dashboard__main">
                 <div className="dashboard__main__content">
+                  {!getUser().confirmed && (
+                    <div className="dashboard__confirm">
+                      Confirm your email address to see your store live
+                    </div>
+                  )}
                   {nav == 0 &&
                     (editingPost !== -1 ? (
                       <>

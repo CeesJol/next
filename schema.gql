@@ -12,6 +12,7 @@ type User {
 	username: String
 	email: String! @unique
 	posts: [Post] @relation
+	confirmed: Boolean
 }
 
 type Query {

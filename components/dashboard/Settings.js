@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Button from "../Button";
 
 import { updateUser, readUser } from "../../pages/api/fauna";
+import { disconfirmUser } from "../../pages/api/confirm";
 
 import UserContext from "../../contexts/userContext";
 
@@ -25,6 +26,12 @@ export default () => {
 
         // Communicate refresh to Dashboard (parent)
 				// props.fn();
+
+				// If email changed, set confirmed to false
+				if (email !== getUser().email) {
+					disconfirmUser(getUser().id)
+					console.log('user disconfirmed');
+				}
 				
 				// Update user locally
 				storeUser({

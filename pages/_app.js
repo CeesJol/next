@@ -2,6 +2,7 @@ import React from "react";
 import App from "next/app";
 import Head from "next/head";
 import UserContext from "../contexts/userContext";
+import { identity } from "./api/auth";
 
 import "../styles/index.scss";
 
@@ -38,13 +39,20 @@ class MyApp extends App {
     return this.state.user != null;
   };
   componentDidMount() {
+		console.log('mount')
     if (this.state.user == null) {
       const user = JSON.parse(localStorage.getItem("user"));
       if (user != null) {
-        this.setState({
-          user,
-        });
-      }
+				identity(user.secret).then((data) => {
+					// Database confirms that user is logged in!
+					this.setState({
+						user,
+					});
+				}, (err) => {
+					// Database denies that user is logged in!
+					this.clearUser();
+				})
+			}
     }
   }
   render() {

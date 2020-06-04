@@ -22,8 +22,8 @@ export const login = (email, password) => {
  *  | LOG OUT
  *  |----------------------------
  */
-export const logout = (user) => {
-  const client = new faunadb.Client({ secret: user.secret });
+export const logout = (secret) => {
+  const client = new faunadb.Client({ secret });
   return client.query(q.Logout(false));
 };
 
@@ -43,3 +43,12 @@ export const signup = (email, password) => {
     })
   );
 };
+
+/** |----------------------------
+ *  | VALIDATE USER'S SECRET
+ *  |----------------------------
+ */
+export const identity = (secret) => {
+	const client = new faunadb.Client({ secret });
+	return client.query(q.Identity())
+}

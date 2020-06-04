@@ -8,7 +8,7 @@ import { logout } from "../../pages/api/auth";
 const DashboardHeader = () => {
   const { userExists, getUser, clearUser } = useContext(UserContext);
   const handleLogout = () => {
-    logout(getUser()).then((data) => {
+    logout(getUser().secret).then((data) => {
       clearUser();
       Router.push("/login");
     });
