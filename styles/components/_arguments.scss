@@ -5,34 +5,38 @@
     @include content-container;
 
     text-align: center;
-
     color: white;
-
-    // padding-bottom: 10rem;
   }
 
   &__args {
-    @include responsive;
+		@include responsive;
 		margin-top: 5rem;
-    text-align: left;
+		text-align: left;
+		
+		img {
+			width: 8rem;
+			margin-bottom: 2rem;
+		}
 
 		@media (min-width: $desktop-breakpoint) {
-			div {
-				margin: 0 2rem;
-			}
+			align-items: initial; // cancel vertical alignment for arguments
 
-			div:first-of-type {
-				margin-left: 0;
-			}
+			// div {
+			// 	margin: 0 2rem;
+			// }
 
-			div:last-of-type {
-				margin-right: 0;
-			}
+			// div:first-of-type {
+			// 	margin-left: 0;
+			// }
+
+			// div:last-of-type {
+			// 	margin-right: 0;
+			// }
 		}
   }
 
   footer {
     margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
   }
 }

@@ -1,18 +1,14 @@
 import React from "react";
 
 const Intro = () => (
-  <div className="container">
-    <div className="intro">
-      <div className="intro__content">
-        <h2>Introduction</h2>
-        <p>
-          Consequat minim et officia ex aliquip ad excepteur non veniam fugiat
-          qui. Ullamco eiusmod cupidatat culpa elit enim nostrud est proident
-          veniam esse commodo officia. Anim voluptate deserunt nisi irure velit
-          eiusmod deserunt officia dolore eiusmod cupidatat occaecat eu
-          cupidatat.
-        </p>
-      </div>
+  <div className="container intro">
+    <div className="intro__content">
+      <h2>Start earning with Instagram</h2>
+      <p>
+        Program name allows you to create an ecommerce store with your referral
+        link to generate revenue from your Instagram page. Use your existing
+        audience to refer people to the right stores.
+      </p>
     </div>
   </div>
 );

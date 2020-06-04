@@ -5,12 +5,9 @@ const Demo = () => (
     <div className="demo">
       <div className="demo__content">
         <div className="demo__text">
-          <h3>Demo</h3>
+          <h4>Sell products with a shoppable Instagram feed</h4>
           <p>
-            Deserunt amet commodo et consectetur reprehenderit sunt pariatur
-            minim quis consequat magna enim. Aute ullamco do incididunt veniam.
-            Lorem laborum do ipsum laborum. Ipsum elit aliqua mollit duis quis
-            mollit id incididunt veniam nostrud.
+            Link images of products to the associated store with your referral link. 
           </p>
         </div>
         <div className="demo__preview">

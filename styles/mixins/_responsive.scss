@@ -8,5 +8,15 @@
 			flex-grow: 1;
 			flex-basis: 0;
 		}
+
+		& > div:not(:last-child) {
+			margin-right: 3rem;
+		}
+	}
+
+	@media (max-width: calc(#{$desktop-breakpoint})) {
+		& > div:not(:last-child) {
+			margin-bottom: 3rem;
+		}
 	}
 }

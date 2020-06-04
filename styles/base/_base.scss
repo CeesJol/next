@@ -14,10 +14,14 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	font-size: 5rem;
+
+	@media (max-width: 30rem) {
+		font-size: 4rem;
+	}
 }
 
 h2 {
-	font-size: 5rem;
+	font-size: 3.5rem;
 }
 
 h3 {
@@ -64,4 +68,10 @@ button:disabled {
 
 img {
 	width: 100%;
+	@media (max-width: $desktop-breakpoint) {
+		max-width: 40rem;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
 }

@@ -1,46 +1,42 @@
-import React from "react"
+import React from "react";
 
-import Wave from "./Wave"
-import Button from './Button';
+import Wave from "./Wave";
+import Button from "./Button";
 
 const Arguments = () => (
-  <div className="container arguments">
-    <div className="arguments__content">
-      <h2>Lorem ipsum something</h2>
-      <div className="arguments__args">
-        <div className="arguments__arg">
-          <h3>Some arg</h3>
-          <p>
-            Deserunt amet commodo et consectetur reprehenderit sunt pariatur
-            minim quis consequat magna enim. Aute ullamco do incididunt veniam.
-            Lorem laborum do ipsum laborum. Ipsum elit aliqua mollit duis quis
-            mollit id incididunt veniam nostrud.
-          </p>
+  <>
+    <div className="container arguments">
+      <div className="arguments__content">
+        <h2>Take the best path forward</h2>
+        <div className="arguments__args">
+          <div className="arguments__arg">
+            <img src="../images/monitor.svg" />
+            <h4>Set up a referral link</h4>
+            <p>Set up the link anywhere and use it for your products.</p>
+          </div>
+          <div className="arguments__arg">
+            <img src="../images/shop.svg" />
+            <h4>Start an online store</h4>
+            <p>
+              Find products related to your niche and put them on your store.
+            </p>
+          </div>
+          <div className="arguments__arg">
+            <img src="../images/give-money.svg" />
+            <h4>Generate revenue</h4>
+            <p>
+              When people buy from the merchant, you will get a referral fee for
+              each purchase.
+            </p>
+          </div>
         </div>
-        <div className="arguments__arg">
-          <h3>Some arg</h3>
-          <p>
-            Deserunt amet commodo et consectetur reprehenderit sunt pariatur
-            minim quis consequat magna enim. Aute ullamco do incididunt veniam.
-            Lorem laborum do ipsum laborum. Ipsum elit aliqua mollit duis quis
-            mollit id incididunt veniam nostrud.
-          </p>
-        </div>
-        <div className="arguments__arg">
-          <h3>Some arg</h3>
-          <p>
-            Deserunt amet commodo et consectetur reprehenderit sunt pariatur
-            minim quis consequat magna enim. Aute ullamco do incididunt veniam.
-            Lorem laborum do ipsum laborum. Ipsum elit aliqua mollit duis quis
-            mollit id incididunt veniam nostrud.
-          </p>
-        </div>
+        <footer>
+          <Button />
+        </footer>
       </div>
-      <footer>
-        <Button />
-      </footer>
     </div>
-  </div>
-)
+    <Wave />
+  </>
+);
 
-export default Arguments
+export default Arguments;

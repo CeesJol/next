@@ -1,24 +1,21 @@
-import React from "react"
+import React from "react";
 
 const Niche = () => (
-  <div className="container">
-    <div className="niche">
-      <div className="niche__content">
-        <div className="niche__text">
-          <h3>Niche</h3>
-          <p>
-            Deserunt amet commodo et consectetur reprehenderit sunt pariatur
-            minim quis consequat magna enim. Aute ullamco do incididunt veniam.
-            Lorem laborum do ipsum laborum. Ipsum elit aliqua mollit duis quis
-            mollit id incididunt veniam nostrud.{" "}
-          </p>
-        </div>
-        <div className="niche__illustration">
-          <img src="/images/undraw_social_influencer_sgsv.svg" />
-        </div>
+  <div className="container niche">
+    <div className="niche__content">
+      <div className="niche__text">
+        <h4>Instagram</h4>
+        <p>
+          Product name was built to be familiar for Instagram users. Your store
+          is optimized for mobile devices with low loading time and high
+          responsiveness.
+        </p>
+      </div>
+      <div className="niche__illustration">
+        <img src="/images/undraw_social_influencer_sgsv.svg" />
       </div>
     </div>
   </div>
-)
+);
 
-export default Niche
+export default Niche;

@@ -39,7 +39,6 @@ class MyApp extends App {
     return this.state.user != null;
   };
   componentDidMount() {
-		console.log('mount')
     if (this.state.user == null) {
       const user = JSON.parse(localStorage.getItem("user"));
       if (user != null) {

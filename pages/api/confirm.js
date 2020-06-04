@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import faunadb, { query as q } from "faunadb";
-import getData from "../../lib/getData";
 
 const secret = process.env.FAUNADB_SECRET_KEY;
 const server = new faunadb.Client({ secret });
@@ -47,23 +46,23 @@ export const disconfirmUser = (id) => {
 };
 
 export const generateToken = (id) => {
-	return jwt.sign(
-		{
-			id,
-		},
-		process.env.EMAIL_SECRET,
-		{
-			expiresIn: "30d",
-		}
-	);
-}
+  return jwt.sign(
+    {
+      id,
+    },
+    process.env.EMAIL_SECRET,
+    {
+      expiresIn: "30d",
+    }
+  );
+};
 
-export const sendConfirmationEmail = (id) => {
-	const token = generateToken(id);
+export const sendConfirmationEmail = async (id) => {
+  const token = generateToken(id);
 
-	// Send mail
-	// ...
+  // Send mail
+  // ...
 
-	console.log('token', token);
-	console.log('it should now send an email lol');
-}
+  console.log("token", token);
+	console.log("it should now send an email lol");
+};
