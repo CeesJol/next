@@ -6,7 +6,7 @@ import Edit from "../components/dashboard/Edit";
 import Product from "../components/dashboard/Product";
 import Products from "../components/dashboard/Products";
 import Settings from "../components/dashboard/Settings";
-import UserContext from "../contexts/userContext";
+import { UserContext } from "../contexts/userContext";
 import { getUserPostsByEmail } from "./api/fauna";
 
 export default function Dashboard(props) {
@@ -19,6 +19,7 @@ export default function Dashboard(props) {
 	
   useEffect(() => {
     if (userUnauthenticated()) {
+		// if (!userExists()) {
       Router.push("/login");
 		}
 
@@ -80,7 +81,7 @@ export default function Dashboard(props) {
 
               <div className="dashboard__main">
                 <div className="dashboard__main__content">
-                  {userExists() && !getUser().confirmed && (
+                  {userExists() && getUser().confirmed == false && (
                     <div className="dashboard__confirm">
                       Confirm your email address to see your store live
                     </div>

@@ -8,7 +8,7 @@ import { login, signup } from "./api/auth";
 import { getUserByEmail } from "./api/fauna";
 import { sendConfirmationEmail } from "./api/confirm";
 
-import UserContext from "../contexts/userContext";
+import { UserContext } from "../contexts/userContext";
 
 export default function Signup() {
   const [status, setStatus] = useState(null);

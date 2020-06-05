@@ -1,81 +1,11 @@
 import React from "react";
 import App from "next/app";
 import Head from "next/head";
-import UserContext from "../contexts/userContext";
-import { identity } from "./api/auth";
-import { readUser } from "./api/fauna";
+import UserContextProvider from "../contexts/userContext";
 
 import "../styles/index.scss";
 
 class MyApp extends App {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: null,
-    };
-  }
-  storeUser = (user) => {
-    // Set state
-    this.setState((prevState) => ({
-      user: {
-        ...prevState.user,
-        ...user,
-      },
-    }));
-
-    this.state.userLoggedOut = false;
-
-    // Set localstorage
-    localStorage.setItem("user", JSON.stringify(this.state.user));
-  };
-  getUser = () => {
-    return this.state.user;
-  };
-  clearUser = () => {
-    // Reset localstorage
-    localStorage.removeItem("user");
-
-    // Reset state
-    this.setState(() => ({
-      userLoggedOut: true
-    }));
-  };
-  userExists = () => {
-    return this.state.user != null;
-  };
-  userUnauthenticated = () => {
-    return this.state.userLoggedOut;
-  };
-  componentDidMount() {
-    if (this.state.user == null) {
-      const user = JSON.parse(localStorage.getItem("user"));
-      if (user != null) {
-        identity(user.secret).then(
-          (data) => {
-            // Database confirms that user is logged in!
-            this.storeUser(user);
-            // Update user info
-            readUser(user.id).then(
-              (data) => {
-                this.storeUser(data.findUserByID);
-              },
-              (err) => {
-                console.log("Fucked up getting the user data", err);
-              }
-            );
-          },
-          (err) => {
-            // Database denies that user is logged in!
-            console.log("Your secret is fake news");
-            this.clearUser();
-          }
-        );
-      } else {
-        // There is no user data
-        this.clearUser();
-      }
-    }
-  }
   render() {
     const { Component, pageProps } = this.props;
     return (
@@ -85,18 +15,9 @@ class MyApp extends App {
             <title>Project name</title>
           </Head>
         </div>
-        <UserContext.Provider
-          value={{
-            user: this.state.user,
-            storeUser: this.storeUser,
-            clearUser: this.clearUser,
-            userExists: this.userExists,
-            userUnauthenticated: this.userUnauthenticated,
-            getUser: this.getUser,
-          }}
-        >
+				<UserContextProvider>
           <Component {...pageProps} />
-        </UserContext.Provider>
+				</UserContextProvider>
       </div>
     );
   }

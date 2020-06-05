@@ -35,7 +35,11 @@
   }
 
   &__right a {
-    font-weight: 300;
+		font-weight: 300;
+		
+		&:not(:last-child) {
+			margin-right: 1rem;
+		}
   }
 
   * {

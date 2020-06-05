@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import Router from "next/router";
-import UserContext from "../../contexts/userContext";
+import { UserContext } from "../../contexts/userContext";
 
 import { logout } from "../../pages/api/auth";
 

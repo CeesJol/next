@@ -4,7 +4,7 @@ import Button from "../Button";
 
 import { updatePost, deletePost } from "../../pages/api/fauna";
 
-import UserContext from "../../contexts/userContext";
+import { UserContext } from "../../contexts/userContext";
 
 export default function Edit(props) {
   const [productUrl, setProductUrl] = useState("");

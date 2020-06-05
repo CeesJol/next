@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-
 import Button from "../Button";
-
 import { updateUser } from "../../pages/api/fauna";
 import { disconfirmUser } from "../../pages/api/confirm";
-
-import UserContext from "../../contexts/userContext";
+import { UserContext } from "../../contexts/userContext";
+import { validateUpdate } from "../../lib/validate";
 
 export default () => {
 	const [username, setUsername] = useState("");
@@ -20,6 +18,11 @@ export default () => {
 	};
 	const handleSave = (event) => {
 		if (event) event.preventDefault();
+		const validationError = validateUpdate(username, email);
+  	if (validationError) {
+			setStatus(validationError)
+			return false;
+		}
 		updateUser(getUser().id, username, email).then(
       (data) => {
 				if (data == -1) {

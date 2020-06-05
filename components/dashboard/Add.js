@@ -4,7 +4,7 @@ import Button from "../Button";
 
 import { createPost } from "../../pages/api/fauna";
 
-import UserContext from "../../contexts/userContext";
+import { UserContext } from "../../contexts/userContext";
 
 export default function Add(props) {
   const [productUrl, setProductUrl] = useState("");

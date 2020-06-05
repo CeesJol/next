@@ -39,7 +39,8 @@ export const signup = (email, username, password) => {
       credentials: { password },
       data: {
         email,
-        username,
+				username,
+				confirmed: false
       },
     })
   );

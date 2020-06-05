@@ -2,6 +2,9 @@
 	max-width: 80rem;
 	margin: 0 auto;
 	padding: 0 $l-size;
+	@media (max-width: $desktop-breakpoint) {
+		padding: 0 $m-size;
+	}
 	height: auto;
 }
 

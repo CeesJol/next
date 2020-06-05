@@ -8,7 +8,7 @@ import { login } from "./api/auth";
 import { getUserByEmail } from "./api/fauna";
 import { sendConfirmationEmail } from "./api/confirm";
 
-import UserContext from "../contexts/userContext";
+import { UserContext } from "../contexts/userContext";
 
 export default function Login() {
   const [status, setStatus] = useState(null);
@@ -21,6 +21,7 @@ export default function Login() {
     login(email, password).then(
       (res) => {
 				setStatus("Login succeeded!");
+				console.log(res.instance.value);
 				const id = res.instance.value.id;
         storeUser({
           id,
