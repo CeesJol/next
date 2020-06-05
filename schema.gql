@@ -9,10 +9,11 @@ type Post {
 }
 
 type User {
-	username: String @unique
+	username: String! @unique
 	email: String! @unique
 	posts: [Post] @relation
 	confirmed: Boolean
+	link: String
 }
 
 type Query {

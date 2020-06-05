@@ -1,5 +1,5 @@
 import faunadb, { query as q } from "faunadb";
-import validate from "../../lib/validate";
+import { validateSignup, validateLogin } from "../../lib/validate";
 
 const secret = process.env.FAUNADB_SECRET_KEY;
 const server = new faunadb.Client({ secret });
@@ -9,13 +9,13 @@ const server = new faunadb.Client({ secret });
  *  |----------------------------
  */
 export const login = (email, password) => {
-  const validationError = validate(email, password);
+  const validationError = validateLogin(email, password);
   if (validationError) return Promise.reject(validationError);
   return server.query(
     q.Login(q.Match(q.Index("userByEmail"), email), {
       password,
     })
-  )
+  );
 };
 
 /** |----------------------------
@@ -31,14 +31,15 @@ export const logout = (secret) => {
  *  | CREATE ACCOUNT
  *  |----------------------------
  */
-export const signup = (email, password) => {
-  const validationError = validate(email, password);
+export const signup = (email, username, password) => {
+  const validationError = validateSignup(email, username, password);
   if (validationError) return Promise.reject(validationError);
   return server.query(
     q.Create(q.Collection("User"), {
       credentials: { password },
       data: {
         email,
+        username,
       },
     })
   );
@@ -49,6 +50,6 @@ export const signup = (email, password) => {
  *  |----------------------------
  */
 export const identity = (secret) => {
-	const client = new faunadb.Client({ secret });
-	return client.query(q.Identity())
-}
+  const client = new faunadb.Client({ secret });
+  return client.query(q.Identity());
+};

@@ -1,3 +1,6 @@
+// Source
+// https://vercel.com/guides/deploying-nextjs-nodejs-and-sendgrid-with-vercel
+
 const sgMail = require('@sendgrid/mail')
 
 export default async function(req, res) {
