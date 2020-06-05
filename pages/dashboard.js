@@ -11,20 +11,24 @@ import { getUserPostsByEmail } from "./api/fauna";
 
 export default function Dashboard(props) {
   const [data, setData] = useState(false);
-  const [error, setError] = useState(false);
+	const [error, setError] = useState(false);
+	const [req, setReq] = useState(false);
   const [nav, setNav] = useState(0); // 0 = main, 1 = settings
   const [editingPost, setEditingPost] = useState(-1);
-
-  const { userExists, getUser } = useContext(UserContext);
+	const { userExists, getUser, userUnauthenticated } = useContext(UserContext);
+	
   useEffect(() => {
-    if (!userExists()) {
+    if (userUnauthenticated()) {
       Router.push("/login");
-    }
+		}
 
-    if (getUser() && getUser().email && !data && !error) {
+		console.log('whaz');
+
+    if (!req && getUser() && getUser().email && !data && !error) {
+			setReq(true);
       getPosts();
     }
-  }, [data, error]);
+  });
   function getPosts() {
     const user = getUser();
     console.log(`Req for ${user.email}`);
@@ -34,7 +38,7 @@ export default function Dashboard(props) {
         setData(data);
       },
       (error) => {
-        console.log("getposts error", error);
+				console.log("getposts error", error);
         setError(error);
       }
     );
@@ -49,7 +53,7 @@ export default function Dashboard(props) {
   }
   return (
     <>
-      {userExists() && (
+      {userExists() && !userUnauthenticated() && (
         <div className="dashboard-container">
           <DashboardHeader />
           <main>
@@ -79,7 +83,7 @@ export default function Dashboard(props) {
 
               <div className="dashboard__main">
                 <div className="dashboard__main__content">
-                  {!getUser().confirmed && (
+                  {userExists() && !getUser().confirmed && (
                     <div className="dashboard__confirm">
                       Confirm your email address to see your store live
                     </div>

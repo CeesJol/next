@@ -2,14 +2,19 @@
 	max-width: 80rem;
 	margin: 0 auto;
 	padding: 0 $l-size;
-	z-index: 9001;
+	height: auto;
+}
+
+@mixin dashboard-content-container {
+	max-width: 80rem;
+	margin: 0 auto;
+	padding: 0 $m-size;
 	height: auto;
 }
 
 @mixin user-content-container {
 	max-width: 80rem;
 	margin: 0 auto;
-	z-index: 9001;
 	height: auto;
 }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 
 import Button from "../Button";
 
-import { updateUser, readUser } from "../../pages/api/fauna";
+import { updateUser } from "../../pages/api/fauna";
 import { disconfirmUser } from "../../pages/api/confirm";
 
 import UserContext from "../../contexts/userContext";

@@ -46,7 +46,7 @@ export default function Add(props) {
           onChange={handleChangeImageUrl}
         />
 
-        {status && <p>Status: {status}</p>}
+        {/* {status && <p>Status: {status}</p>} */}
 
         <Button text="Add new product" fn={handleCreate} />
       </form>

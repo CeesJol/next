@@ -120,6 +120,7 @@ export const readUser = async (id) => {
 		findUserByID(id: "${id}") {
 			username
 			email
+			confirmed
 		}
 	}`);
 };

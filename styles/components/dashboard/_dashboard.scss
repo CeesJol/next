@@ -18,7 +18,7 @@
 		border-bottom: 1px solid $light-grey-2;
 
 		&__content {
-			@include content-container;
+			@include dashboard-content-container;
 
 			display: flex;
 			justify-content: space-around;
@@ -49,7 +49,7 @@
 
 	&__main {
 		&__content {
-			@include content-container;
+			@include dashboard-content-container;
 		}
 	}
 

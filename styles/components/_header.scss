@@ -4,11 +4,14 @@
   border-bottom: 1px solid $light-grey-2;
   width: 100%;
   padding-top: 2rem;
-  padding-bottom: 2rem;
-  z-index: 1;
+	padding-bottom: 2rem;
 
   &__content {
-    @include content-container;
+		@include content-container;
+		
+		&--dashboard {
+			@include dashboard-content-container;
+		}
 
     display: flex;
     align-items: center;

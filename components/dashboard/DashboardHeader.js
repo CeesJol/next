@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import Link from "next/link";
 import Router from "next/router";
 import UserContext from "../../contexts/userContext";
 
@@ -15,7 +14,7 @@ const DashboardHeader = () => {
   };
   return (
     <header className="header">
-      <div className="header__content">
+      <div className="header__content header__content--dashboard">
         <div className="header__left">
           <h3>
 						<a className="header__title" onClick={Router.reload}>

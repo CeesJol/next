@@ -3,6 +3,7 @@ import App from "next/app";
 import Head from "next/head";
 import UserContext from "../contexts/userContext";
 import { identity } from "./api/auth";
+import { readUser } from "./api/fauna";
 
 import "../styles/index.scss";
 
@@ -22,6 +23,8 @@ class MyApp extends App {
       },
     }));
 
+    this.state.user.loggedOut = false;
+
     // Set localstorage
     localStorage.setItem("user", JSON.stringify(this.state.user));
   };
@@ -29,29 +32,56 @@ class MyApp extends App {
     return this.state.user;
   };
   clearUser = () => {
-    // Reset state
-    this.setState({ user: null });
-
     // Reset localstorage
     localStorage.removeItem("user");
+
+    // Reset state
+    this.setState(() => ({
+      user: {
+        loggedOut: true,
+      },
+    }));
   };
   userExists = () => {
     return this.state.user != null;
   };
+  userUnauthenticated = () => {
+		console.log('unauth', (this.state.user && this.state.user.loggedOut));
+    return this.state.user && this.state.user.loggedOut;
+  };
   componentDidMount() {
+    console.log("mount");
     if (this.state.user == null) {
       const user = JSON.parse(localStorage.getItem("user"));
       if (user != null) {
-				identity(user.secret).then((data) => {
-					// Database confirms that user is logged in!
-					this.setState({
-						user,
-					});
-				}, (err) => {
-					// Database denies that user is logged in!
-					this.clearUser();
-				})
-			}
+        console.log("user", user);
+        identity(user.secret).then(
+          (data) => {
+            // Database confirms that user is logged in!
+            this.storeUser(user);
+            // Update user info
+            readUser(user.id).then(
+              (data) => {
+                console.log(data.findUserByID);
+                this.storeUser(data.findUserByID);
+                console.log(this.state);
+              },
+              (err) => {
+                console.log("Fucked up getting the user data", err);
+              }
+            );
+          },
+          (err) => {
+            // Database denies that user is logged in!
+            console.log("Youre secret is fake news");
+            this.clearUser();
+          }
+        );
+      } else {
+        // There is no user data
+        console.log("no use");
+        this.clearUser();
+      }
     }
   }
   render() {
@@ -69,6 +99,7 @@ class MyApp extends App {
             storeUser: this.storeUser,
             clearUser: this.clearUser,
             userExists: this.userExists,
+            userUnauthenticated: this.userUnauthenticated,
             getUser: this.getUser,
           }}
         >
