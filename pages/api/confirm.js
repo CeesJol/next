@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import faunadb, { query as q } from "faunadb";
-import Email from "../../emails/confirm"
+import Email from "../../emails/confirm";
 
 const secret = process.env.FAUNADB_SECRET_KEY;
 const server = new faunadb.Client({ secret });
@@ -14,7 +14,7 @@ export const confirm = (token) => {
     // If it went well, send info to database
     return confirmUser(decoded.id);
   } catch (e) {
-    console.log(e);
+    console.log("token verification error", e);
   }
 };
 
@@ -59,9 +59,8 @@ export const generateToken = (id) => {
 };
 
 export const sendConfirmationEmail = async (id, email) => {
-	const token = generateToken(id);
-	const message = Email(token);
-	console.log('msg', message)
+  const token = generateToken(id);
+  const message = Email(token);
 
   // Send mail
   const res = await fetch("/api/send", {
@@ -70,13 +69,10 @@ export const sendConfirmationEmail = async (id, email) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-			email: `${email}`,
-			message: `${message}`
-		}),
-	});
-	console.log('res', res)
-  const text = await res.text();
-
-  console.log("token", token);
-  console.log("it should now send an email lol");
+      email: `${email}`,
+      message: `${message}`,
+    }),
+  });
+	const text = await res.text();
+	console.log('email text', text)
 };

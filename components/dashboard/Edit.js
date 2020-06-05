@@ -21,8 +21,6 @@ export default function Edit(props) {
     if (event) event.preventDefault();
     updatePost(props.post._id, productUrl, imageUrl).then(
       (data) => {
-        console.log("data", data);
-
         // Communicate refresh to Dashboard (parent)
         props.fn();
       },
@@ -35,8 +33,6 @@ export default function Edit(props) {
     if (event) event.preventDefault();
     deletePost(props.post._id).then(
       (data) => {
-        console.log("data", data);
-
         // Communicate refresh to Dashboard (parent)
         props.fn();
       },

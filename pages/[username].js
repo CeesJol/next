@@ -25,7 +25,7 @@ export default function User() {
   });
 
   function drawItems() {
-		console.log('data!', data)
+		console.log('data', data)
 		if (!data) return <p>Loading...</p>;
 		if (!data.user) return <p>404 - user not found</p>;
 		if (!data.user.confirmed) return <p>Confirm your email address to see your store live</p>

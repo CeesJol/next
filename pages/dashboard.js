@@ -32,7 +32,6 @@ export default function Dashboard(props) {
     console.log(`Req for ${user.email}`);
     getUserPostsByEmail(user.email).then(
       (data) => {
-        console.log("getposts data", data);
         setData(data);
       },
       (error) => {

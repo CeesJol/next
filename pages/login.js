@@ -29,7 +29,6 @@ export default function Login() {
 					email
 				});
         getUserByEmail(email).then((data) => {
-					console.log('data', data)
           storeUser({
 						username: data.userByEmail.username,
 						confirmed: data.userByEmail.confirmed
@@ -38,7 +37,9 @@ export default function Login() {
 						sendConfirmationEmail(id, email);
 					}
 					Router.push("/dashboard");
-        });
+        }, (err) => {
+					setStatus(`Login failed: ${err}`);
+				});
       },
       (err) => {
         setStatus(`Login failed: ${err}`);

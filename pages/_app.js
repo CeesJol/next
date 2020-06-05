@@ -47,11 +47,9 @@ class MyApp extends App {
     return this.state.userLoggedOut;
   };
   componentDidMount() {
-    console.log("mount");
     if (this.state.user == null) {
       const user = JSON.parse(localStorage.getItem("user"));
       if (user != null) {
-        console.log("user", user);
         identity(user.secret).then(
           (data) => {
             // Database confirms that user is logged in!
@@ -59,9 +57,7 @@ class MyApp extends App {
             // Update user info
             readUser(user.id).then(
               (data) => {
-                console.log(data.findUserByID);
                 this.storeUser(data.findUserByID);
-                console.log(this.state);
               },
               (err) => {
                 console.log("Fucked up getting the user data", err);
@@ -70,13 +66,12 @@ class MyApp extends App {
           },
           (err) => {
             // Database denies that user is logged in!
-            console.log("Youre secret is fake news");
+            console.log("Your secret is fake news");
             this.clearUser();
           }
         );
       } else {
         // There is no user data
-        console.log("no use");
         this.clearUser();
       }
     }
