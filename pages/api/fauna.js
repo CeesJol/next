@@ -7,6 +7,7 @@ import executeQuery from "../../lib/executeQuery";
 export const getUserPosts = async (username) => {
   return executeQuery(`query FindPostsByID {
 		user(username: "${username}") {
+			confirmed
 			posts {
 				data {
 					_id

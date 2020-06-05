@@ -25,9 +25,11 @@ export default function User() {
   });
 
   function drawItems() {
-    if (!data) return <p>Loading...</p>;
+		console.log('data!', data)
+		if (!data) return <p>Loading...</p>;
+		if (!data.user) return <p>404 - user not found</p>;
+		if (!data.user.confirmed) return <p>Confirm your email address to see your store live</p>
     if (error || data === -1) return <p>Failed to load</p>;
-    if (!data.user) return <p>404 - user not found</p>;
 
     const posts = data.user.posts.data;
 

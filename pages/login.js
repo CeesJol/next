@@ -28,13 +28,15 @@ export default function Login() {
 					secret: res.secret,
 					email
 				});
-				sendConfirmationEmail(id); // DELETE ME IM ONLY HERE FOR TESTING
         getUserByEmail(email).then((data) => {
 					console.log('data', data)
           storeUser({
 						username: data.userByEmail.username,
 						confirmed: data.userByEmail.confirmed
 					});
+					if (!data.userByEmail.confirmed) {
+						sendConfirmationEmail(id, email);
+					}
 					Router.push("/dashboard");
         });
       },
@@ -49,7 +51,6 @@ export default function Login() {
     signup(email, password).then(
       (res) => {
 				handleLogin();
-				sendConfirmationEmail(id);
       },
       (err) => {
         setStatus(`Signup failed: ${err}`);
