@@ -24,7 +24,7 @@ const Header = ({ transparentHeader = false }) => {
           <h4>
             {userExists() ? (
               <Link href="/dashboard">
-                <a>{user.username}</a>
+                <a>the name {user.username}</a>
               </Link>
             ) : (
               <Link href="/login">

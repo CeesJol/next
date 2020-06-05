@@ -22,8 +22,6 @@ export default function Dashboard(props) {
       Router.push("/login");
 		}
 
-		console.log('whaz');
-
     if (!req && getUser() && getUser().email && !data && !error) {
 			setReq(true);
       getPosts();

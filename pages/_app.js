@@ -23,7 +23,7 @@ class MyApp extends App {
       },
     }));
 
-    this.state.user.loggedOut = false;
+    this.state.userLoggedOut = false;
 
     // Set localstorage
     localStorage.setItem("user", JSON.stringify(this.state.user));
@@ -37,17 +37,14 @@ class MyApp extends App {
 
     // Reset state
     this.setState(() => ({
-      user: {
-        loggedOut: true,
-      },
+      userLoggedOut: true
     }));
   };
   userExists = () => {
     return this.state.user != null;
   };
   userUnauthenticated = () => {
-		console.log('unauth', (this.state.user && this.state.user.loggedOut));
-    return this.state.user && this.state.user.loggedOut;
+    return this.state.userLoggedOut;
   };
   componentDidMount() {
     console.log("mount");
