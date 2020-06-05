@@ -22,7 +22,12 @@ export default () => {
 		if (event) event.preventDefault();
 		updateUser(getUser().id, username, email).then(
       (data) => {
-        console.log("data", data);
+				console.log("data", data);
+				
+				if (data == -1) {
+					setStatus("That username is already taken")
+					return false;
+				}
 
         // Communicate refresh to Dashboard (parent)
 				// props.fn();
