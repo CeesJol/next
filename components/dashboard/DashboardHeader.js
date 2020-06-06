@@ -16,11 +16,14 @@ const DashboardHeader = () => {
     <header className="header">
       <div className="header__content header__content--dashboard">
         <div className="header__left">
-          <h3>
-						<a className="header__title" onClick={Router.reload}>
-							{userExists() ? getUser().username : "Loading..."}
-						</a>
-          </h3>
+          <div class="icon-container">
+            <h3>
+              <a className="header__title" onClick={Router.reload}>
+								<img className="icon--large" src="../images/icon-small.png" />
+                {userExists() ? getUser().username : "Loading..."}
+              </a>
+            </h3>
+          </div>
         </div>
         <div className="header__right">
           <a onClick={handleLogout}>Log out</a>

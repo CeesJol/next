@@ -12,11 +12,14 @@ const Header = ({ transparentHeader = false }) => {
     >
       <div className="header__content">
         <div className="header__left">
-          <h3>
+          <div class="icon-container">
             <Link href="/">
-              <a className="header__title">Affilas</a>
+              <a className="header__title">
+								<img className="icon--large" src="../images/icon-small.png" />
+                <h3>Affilas</h3>
+              </a>
             </Link>
-          </h3>
+          </div>
         </div>
         <div className="header__right">
           <h4>

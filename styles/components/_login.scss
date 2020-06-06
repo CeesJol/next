@@ -21,7 +21,7 @@
     border-radius: 3px;
     padding: 2rem;
     width: 100%;
-    height: auto;
+		height: auto;
 
     @media (min-width: $login-box-breakpoint) {
 			@include shadow;
@@ -29,11 +29,10 @@
       width: $login-box-width;
       height: auto;
     }
-
-    &--title,
-    &--subtitle {
-      padding-bottom: 2rem;
-    }
+		
+		&--subtitle {
+			padding: 2rem 0;
+		}
 
     &--subtitle {
       font-weight: 300;

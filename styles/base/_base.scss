@@ -40,6 +40,10 @@ a {
 	&:hover {
 		opacity: 0.75;
 	}
+
+	&:visited {
+		color: blue;
+	}
 }
 
 body {
@@ -60,10 +64,6 @@ button, a {
 
 button:disabled {
   cursor: default;
-}
-
-.is-active {
-  font-weight: bold;
 }
 
 img {

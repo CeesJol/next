@@ -12,8 +12,8 @@ import { UserContext } from "../contexts/userContext";
 
 export default function Signup() {
   const [status, setStatus] = useState(null);
-	const [email, setEmail] = useState("");
-	const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { userExists, storeUser, userUnauthenticated } = useContext(
     UserContext
@@ -66,8 +66,8 @@ export default function Signup() {
   };
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
-	};
-	const handleChangeUsername = (event) => {
+  };
+  const handleChangeUsername = (event) => {
     setUsername(event.target.value);
   };
   const handleChangePassword = (event) => {
@@ -85,7 +85,10 @@ export default function Signup() {
       <div className="login__box">
         <div className="login__box__content">
           <form>
-            <h4 className="login__box--title">Affilas</h4>
+            <div class="icon-container">
+              <img className="icon--large" src="../images/icon-small.png" />
+              <h3 className="login__box--title">Affilas</h3>
+            </div>
             <h4 className="login__box--subtitle">
               Create your Affilas account
             </h4>
@@ -122,7 +125,12 @@ export default function Signup() {
           </form>
         </div>
       </div>
-			<p>Already have an account? <Link href="/login"><a>Log in</a></Link></p>
+      <p>
+        Already have an account?{" "}
+        <Link href="/login">
+          <a>Log in</a>
+        </Link>
+      </p>
     </div>
   );
 }

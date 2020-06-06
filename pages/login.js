@@ -65,7 +65,10 @@ export default function Login() {
       <div className="login__box">
         <div className="login__box__content">
           <form>
-            <h4 className="login__box--title">Affilas</h4>
+						<div class="icon-container">
+							<img className="icon--large" src="../images/icon-small.png" />
+							<h3 className="login__box--title">Affilas</h3>
+						</div>
             <h4 className="login__box--subtitle">
               Log in with your email address and password
             </h4>
