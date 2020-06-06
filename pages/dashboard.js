@@ -11,20 +11,19 @@ import { getUserPostsByEmail } from "./api/fauna";
 
 export default function Dashboard(props) {
   const [data, setData] = useState(false);
-	const [error, setError] = useState(false);
-	const [req, setReq] = useState(false);
+  const [error, setError] = useState(false);
+  const [req, setReq] = useState(false);
   const [nav, setNav] = useState(0); // 0 = main, 1 = settings
   const [editingPost, setEditingPost] = useState(-1);
-	const { userExists, getUser, userUnauthenticated } = useContext(UserContext);
-	
+  const { userExists, getUser, userUnauthenticated } = useContext(UserContext);
+
   useEffect(() => {
     if (userUnauthenticated()) {
-		// if (!userExists()) {
       Router.push("/login");
-		}
+    }
 
     if (!req && getUser() && getUser().email && !data && !error) {
-			setReq(true);
+      setReq(true);
       getPosts();
     }
   });
@@ -36,7 +35,7 @@ export default function Dashboard(props) {
         setData(data);
       },
       (error) => {
-				console.log("getposts error", error);
+        console.log("getposts error", error);
         setError(error);
       }
     );
@@ -99,6 +98,19 @@ export default function Dashboard(props) {
                       </>
                     ) : (
                       <>
+                        {userExists() && getUser().confirmed == true && (
+                          <div className="dashboard__live">
+                            View{" "}
+                            <a
+                              href={`http://localhost:3000/${
+                                getUser().username
+                              }`}
+                              target="_blank"
+                            >
+                              your store
+                            </a>
+                          </div>
+                        )}
                         <Add fn={getPosts} />
                         <Products
                           data={data}

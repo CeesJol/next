@@ -6,7 +6,11 @@
 
     text-align: center;
     color: white;
-  }
+	}
+	
+	p {
+		color: rgba(255, 255, 255, 0.8);
+	}
 
   &__args {
 		@include responsive;

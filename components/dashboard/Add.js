@@ -9,7 +9,7 @@ import { UserContext } from "../../contexts/userContext";
 export default function Add(props) {
   const [productUrl, setProductUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-
+  const [status, setStatus] = useState("");
   const { userExists, getUser } = useContext(UserContext);
   const handleChangeProductUrl = (event) => {
     setProductUrl(event.target.value);
@@ -19,7 +19,15 @@ export default function Add(props) {
   };
   const handleCreate = async (event) => {
     if (event) event.preventDefault();
-    await createPost(getUser(), productUrl, imageUrl);
+    createPost(getUser(), productUrl, imageUrl).then(
+      (data) => {
+        setStatus("Created post successfully!");
+      },
+      (err) => {
+        setStatus("Something went wrong. Please try again later");
+        console.log("err", err);
+      }
+    );
 
     // Communicate refresh to Dashboard (parent)
     props.fn();
@@ -46,7 +54,7 @@ export default function Add(props) {
           onChange={handleChangeImageUrl}
         />
 
-        {/* {status && <p>Status: {status}</p>} */}
+        {status && <p>Status: {status}</p>}
 
         <Button text="Add new product" fn={handleCreate} />
       </form>
