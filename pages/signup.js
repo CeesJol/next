@@ -37,9 +37,6 @@ export default function Signup() {
               username: data.userByEmail.username,
               confirmed: data.userByEmail.confirmed,
             });
-            if (!data.userByEmail.confirmed) {
-              sendConfirmationEmail(id, email);
-            }
             Router.push("/dashboard");
           },
           (err) => {
@@ -57,7 +54,8 @@ export default function Signup() {
     setStatus("Creating account...");
     signup(email, username, password).then(
       (res) => {
-        handleLogin();
+				handleLogin();
+				sendConfirmationEmail(id, email);
       },
       (err) => {
         setStatus(`Signup failed: ${err}`);
@@ -85,7 +83,7 @@ export default function Signup() {
       <div className="login__box">
         <div className="login__box__content">
           <form>
-            <div class="icon-container">
+            <div className="icon-container">
               <img className="icon--large" src="../images/icon-small.png" />
               <h3 className="login__box--title">Affilas</h3>
             </div>
@@ -119,7 +117,7 @@ export default function Signup() {
               onChange={handleChangePassword}
             />
 
-            {status && <p>Status: {status}</p>}
+            {status && <p>{status}</p>}
 
             <Button fn={handleSignUp} text="Sign up" />
           </form>

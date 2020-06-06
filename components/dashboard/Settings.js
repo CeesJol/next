@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Button from "../Button";
 import { updateUser } from "../../pages/api/fauna";
 import { updatePassword } from "../../pages/api/auth";
-import { disconfirmUser } from "../../pages/api/confirm";
+import { disconfirmUser, sendConfirmationEmail } from "../../pages/api/confirm";
 import { UserContext } from "../../contexts/userContext";
 import { validateUpdate, validatePassword } from "../../lib/validate";
 
@@ -15,7 +15,7 @@ export default () => {
   const [status2, setStatus2] = useState("");
   const { storeUser, getUser } = useContext(UserContext);
   const handleChangeUsername = (event) => {
-    setUsername(event.target.value);
+    setUsername(event.target.value.toLowerCase());
   };
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -34,19 +34,19 @@ export default () => {
       return false;
     }
     console.log("website", website);
-    updateUser(getUser().id, username, email, website).then(
+    const user = getUser();
+    updateUser(user.id, username, email, website).then(
       (data) => {
         if (data == -1) {
           setStatus("That username is already taken");
           return false;
         }
 
-        // Communicate refresh to Dashboard (parent)
-        // props.fn();
-
-        // If email changed, set confirmed to false
-        if (email !== getUser().email) {
-          disconfirmUser(getUser().id);
+				// If email changed, set confirmed to false and 
+				// send a new confirmation email
+        if (email !== user.email) {
+          disconfirmUser(user.id);
+          sendConfirmationEmail(user.id, email);
           console.log("user disconfirmed");
         }
 
@@ -122,7 +122,7 @@ export default () => {
             onChange={handleChangeWebsite}
           />
 
-          {status && <p>Status: {status}</p>}
+          {status && <p>{status}</p>}
 
           <Button text="Save" fn={handleSave} />
         </form>
@@ -131,7 +131,7 @@ export default () => {
       <div className="dashboard__settings">
         <h4 className="dashboard__settings--title">Change password</h4>
         <form>
-          <label>Password</label>
+          <label>New Password</label>
           <input
             type="password"
             id="password"
@@ -140,7 +140,7 @@ export default () => {
             onChange={handleChangePassword}
           />
 
-          {status2 && <p>Status: {status2}</p>}
+          {status2 && <p>{status2}</p>}
 
           <Button text="Save" fn={handleSavePassword} />
         </form>

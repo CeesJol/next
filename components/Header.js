@@ -12,7 +12,7 @@ const Header = ({ transparentHeader = false }) => {
     >
       <div className="header__content">
         <div className="header__left">
-          <div class="icon-container">
+          <div className="icon-container">
             <Link href="/">
               <a className="header__title">
 								<img className="icon--large" src="../images/icon-small.png" />

@@ -16,7 +16,7 @@ const DashboardHeader = () => {
     <header className="header">
       <div className="header__content header__content--dashboard">
         <div className="header__left">
-          <div class="icon-container">
+          <div className="icon-container">
             <h3>
               <a className="header__title" onClick={Router.reload}>
 								<img className="icon--large" src="../images/icon-small.png" />

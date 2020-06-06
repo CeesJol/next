@@ -5,6 +5,7 @@ import executeQuery from "../../lib/executeQuery";
  *  |----------------------------
  */
 export const getUserPosts = async (username) => {
+	username = username.toLowerCase();
   return executeQuery(`query FindPostsByID {
 		user(username: "${username}") {
 			confirmed
@@ -101,6 +102,7 @@ export const deletePost = async (id) => {
  *  |----------------------------
  */
 export const updateUser = async (id, username, email, website) => {
+	username = username.toLowerCase();
   return executeQuery(`mutation UpdateUser {
 		updateUser(id: "${id}", data:{
 			username: "${username}"

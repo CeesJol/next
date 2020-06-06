@@ -6,7 +6,6 @@ import Button from "../components/Button";
 
 import { login } from "./api/auth";
 import { getUserByEmail } from "./api/fauna";
-import { sendConfirmationEmail } from "./api/confirm";
 
 import { UserContext } from "../contexts/userContext";
 
@@ -34,9 +33,6 @@ export default function Login() {
 						username: data.userByEmail.username,
 						confirmed: data.userByEmail.confirmed
 					});
-					if (!data.userByEmail.confirmed) {
-						sendConfirmationEmail(id, email);
-					}
 					Router.push("/dashboard");
         }, (err) => {
 					setStatus(`Login failed: ${err}`);
@@ -65,7 +61,7 @@ export default function Login() {
       <div className="login__box">
         <div className="login__box__content">
           <form>
-						<div class="icon-container">
+						<div className="icon-container">
 							<img className="icon--large" src="../images/icon-small.png" />
 							<h3 className="login__box--title">Affilas</h3>
 						</div>
@@ -90,7 +86,7 @@ export default function Login() {
               onChange={handleChangePassword}
             />
 
-            {status && <p>Status: {status}</p>}
+            {status && <p>{status}</p>}
 
             <Button fn={handleLogin} text="Log in" />
           </form>

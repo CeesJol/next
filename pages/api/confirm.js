@@ -74,5 +74,4 @@ export const sendConfirmationEmail = async (id, email) => {
     }),
   });
 	const text = await res.text();
-	console.log('email text', text)
 };

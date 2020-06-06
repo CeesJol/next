@@ -69,7 +69,7 @@ export default function Edit(props) {
             onChange={handleChangeImageUrl}
           />
 
-          {status && <p>Status: {status}</p>}
+          {status && <p>{status}</p>}
 
           <Button text="Save" fn={handleSave} />
           <Button text="Delete" fn={handleDelete} color="red" />
