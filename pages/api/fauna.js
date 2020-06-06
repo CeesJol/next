@@ -100,14 +100,16 @@ export const deletePost = async (id) => {
  *  | UPDATE USER
  *  |----------------------------
  */
-export const updateUser = async (id, username, email) => {
+export const updateUser = async (id, username, email, website) => {
   return executeQuery(`mutation UpdateUser {
 		updateUser(id: "${id}", data:{
 			username: "${username}"
 			email: "${email}"
+			website: "${website}"
 		}) {
 			username
 			email
+			website
 		}
 	}`);
 };
@@ -122,6 +124,7 @@ export const readUser = async (id) => {
 			username
 			email
 			confirmed
+			website
 		}
 	}`);
 };

@@ -39,8 +39,9 @@ export const signup = (email, username, password) => {
       credentials: { password },
       data: {
         email,
-				username,
-				confirmed: false
+        username,
+        confirmed: false,
+        website: "",
       },
     })
   );
@@ -53,4 +54,16 @@ export const signup = (email, username, password) => {
 export const identity = (secret) => {
   const client = new faunadb.Client({ secret });
   return client.query(q.Identity());
+};
+
+/** |----------------------------
+ *  | UPDATE USER'S PASSWORD
+ *  |----------------------------
+ */
+export const updatePassword = (id, newPassword) => {
+  return server.query(
+    q.Update(q.Ref(q.Collection("User"), id), {
+      credentials: { password: newPassword },
+    })
+  );
 };
