@@ -12,7 +12,7 @@ class MyApp extends App {
       <div>
         <div>
           <Head>
-            <title>Project name</title>
+            <title>Affilas</title>
           </Head>
         </div>
 				<UserContextProvider>

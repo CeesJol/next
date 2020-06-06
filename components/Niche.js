@@ -6,7 +6,7 @@ const Niche = () => (
       <div className="niche__text">
         <h4>Instagram</h4>
         <p>
-          Product name was built to be familiar for Instagram users. Your store
+          Affilas was built to be familiar for Instagram users. Your store
           is optimized for mobile devices with low loading time and high
           responsiveness.
         </p>

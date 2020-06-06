@@ -65,7 +65,7 @@ export default function Login() {
       <div className="login__box">
         <div className="login__box__content">
           <form>
-            <h4 className="login__box--title">Program name</h4>
+            <h4 className="login__box--title">Affilas</h4>
             <h4 className="login__box--subtitle">
               Log in with your email address and password
             </h4>

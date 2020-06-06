@@ -17,15 +17,26 @@
 	transition: 0.3s;
 	font-size: $font-size-default;
 
+	&:hover {
+		background-color: lighten($light-green, 7%);
+	}
+
 	&--shadow {
 		@include shadow;
+	}
+
+	&--red {
+		background-color: $light-red;
+
+		&:hover {
+			// display: none;
+			background-color: lighten($light-red, 10%);
+		}
 	}
 
 	a {
 		font-weight: 400;
 	}
 
-	&:hover {
-		background-color: lighten($light-green, 7%);
-	}
+	
 }

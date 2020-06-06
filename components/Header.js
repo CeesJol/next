@@ -14,7 +14,7 @@ const Header = ({ transparentHeader = false }) => {
         <div className="header__left">
           <h3>
             <Link href="/">
-              <a className="header__title">Project name</a>
+              <a className="header__title">Affilas</a>
             </Link>
           </h3>
         </div>

@@ -15,7 +15,7 @@ const Splash = () => (
                 Create an affiliate ecommerce store
               </h1>
               <p>
-                Program name allows you to build a store and start earning with
+								Affilas allows you to build a store and start earning with
                 your Instagram page in minutes
               </p>
             </div>

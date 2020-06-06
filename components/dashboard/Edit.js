@@ -72,7 +72,7 @@ export default function Edit(props) {
           {status && <p>Status: {status}</p>}
 
           <Button text="Save" fn={handleSave} />
-          <Button text="Delete" fn={handleDelete} />
+          <Button text="Delete" fn={handleDelete} color="red" />
         </form>
       </div>
     </>

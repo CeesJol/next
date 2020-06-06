@@ -7,7 +7,7 @@ const UserFooter = () => (
       <div className="userfooter__content">
         <h4>
           <Link href="/">
-            <a>Project name</a>
+            <a>Affilas</a>
           </Link>
         </h4>
       </div>

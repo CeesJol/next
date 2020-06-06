@@ -85,9 +85,9 @@ export default function Signup() {
       <div className="login__box">
         <div className="login__box__content">
           <form>
-            <h4 className="login__box--title">Program name</h4>
+            <h4 className="login__box--title">Affilas</h4>
             <h4 className="login__box--subtitle">
-              Create your Program name account
+              Create your Affilas account
             </h4>
             <label htmlFor="email">Email</label>
             <input

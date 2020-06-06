@@ -11,7 +11,7 @@ export default async function(req, res) {
   const content = {
     to: process.env.NODE_ENV != 'development' ? email : 'cjol99@icloud.com',
     from: 'cjol99@icloud.com',
-    subject: `New Message From - product name`,
+    subject: `Confirm your account on Affilas`,
     text: message,
     html: `<p>${message}</p>`
   }
