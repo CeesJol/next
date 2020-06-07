@@ -101,14 +101,10 @@ export default function Dashboard(props) {
                         {userExists() && getUser().confirmed == true && (
                           <div className="dashboard__live">
                             View{" "}
-                            <a
-                              href={`http://localhost:3000/${
-                                getUser().username
-                              }`}
-                              target="_blank"
-                            >
+                            <a href={getUser().username} target="_blank">
                               your store
                             </a>
+														{" "}live
                           </div>
                         )}
                         <Add fn={getPosts} />

@@ -1,33 +1,41 @@
 import React, { useState, useEffect, useContext } from "react";
-
 import Button from "../Button";
-
 import { updatePost, deletePost } from "../../pages/api/fauna";
-
-import { UserContext } from "../../contexts/userContext";
 
 export default function Edit(props) {
   const [productUrl, setProductUrl] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-
-  const { userExists, getUser } = useContext(UserContext);
+	// const fileInput = React.createRef();
   const handleChangeProductUrl = (event) => {
     setProductUrl(event.target.value);
   };
-  const handleChangeImageUrl = (event) => {
-    setImageUrl(event.target.value);
-  };
   const handleSave = async (event) => {
-    if (event) event.preventDefault();
-    updatePost(props.post._id, productUrl, imageUrl).then(
-      (data) => {
-        // Communicate refresh to Dashboard (parent)
-        props.fn();
-      },
-      (err) => {
-        console.log("err", err);
-      }
-    );
+    // if (event) event.preventDefault();
+    // updatePost(props.post._id, productUrl, imageUrl).then(
+    //   (data) => {
+    //     // Communicate refresh to Dashboard (parent)
+    //     props.fn();
+    //   },
+    //   (err) => {
+    //     console.log("err", err);
+    //   }
+		// );
+		if (event) event.preventDefault();
+		// const file = fileInput.current.files[0];
+    // var reader = new FileReader();
+    // reader.onloadend = function () {
+		// 	console.log("Got result.");
+			// const imageUrl = reader.result;
+      updatePost(props.post._id, productUrl, props.post.imageUrl).then(
+        (data) => {
+					// Communicate refresh to Dashboard (parent)
+					props.fn();
+        },
+        (err) => {
+          console.log("err", err);
+        }
+      );
+    // };
+    // reader.readAsDataURL(file);
   };
   const handleDelete = async (event) => {
     if (event) event.preventDefault();
@@ -43,8 +51,7 @@ export default function Edit(props) {
   };
   useEffect(() => {
     const post = props.post;
-    setProductUrl(post.productUrl);
-    setImageUrl(post.imageUrl);
+    setProductUrl(post.productUrl);		
   }, []);
   return (
     <>
@@ -60,14 +67,8 @@ export default function Edit(props) {
             onChange={handleChangeProductUrl}
           />
 
-          <label>Image URL</label>
-          <input
-            type="text"
-            id="imageUrl"
-            name="imageUrl"
-            value={imageUrl}
-            onChange={handleChangeImageUrl}
-          />
+          {/* <label>Image URL</label>
+          <input type="file" ref={fileInput} /> */}
 
           {status && <p>{status}</p>}
 
