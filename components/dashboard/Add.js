@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import imageCompression from "browser-image-compression";
+import ReactCrop from "react-image-crop";
 import Button from "../Button";
 import { createPost } from "../../pages/api/fauna";
 import { UserContext } from "../../contexts/userContext";
@@ -10,16 +11,61 @@ export default function Add(props) {
   const { getUser } = useContext(UserContext);
   const fileInput = React.createRef();
   const [file, setFile] = useState(null);
+  const [crop, setCrop] = useState({ aspect: 1 });
   const handleChangeProductUrl = (event) => {
     setProductUrl(event.target.value);
   };
+  const handleSetImage = async (event) => {
+    setCrop({ aspect: 1 });
+    setFile(await convert(event.target.files[0]));
+  };
+  /**
+   * Crop image
+   * @param {HTMLImageElement} image - Image File Object
+   * @param {Object} crop - crop Object
+   * @param {String} fileName - Name of the returned file in Promise
+   */
+  function getCroppedImg(image, crop, fileName) {
+    const canvas = document.createElement("canvas");
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    canvas.width = crop.width;
+    canvas.height = crop.height;
+    const ctx = canvas.getContext("2d");
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+
+    // As Base64 string
+    // const base64Image = canvas.toDataURL('image/jpeg');
+
+    // As a blob
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => {
+          blob.name = fileName;
+          resolve(blob);
+        },
+        "image/jpeg",
+        1
+      );
+    });
+  }
   /**
    * Compress image
    */
-  async function handleImageUpload(event) {
-    if (event) event.preventDefault();
-    const imageFile = event.target.files[0];
-    console.log("originalFile instanceof Blob", imageFile instanceof Blob); // true
+  async function compressImg(imageFile) {
+    // if (event) event.preventDefault();
+    // const imageFile = event.target.files[0];
     console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
     const options = {
@@ -31,15 +77,10 @@ export default function Add(props) {
     try {
       const compressedFile = await imageCompression(imageFile, options);
       console.log(
-        "compressedFile instanceof Blob",
-        compressedFile instanceof Blob
-      ); // true
-      console.log(
         `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
-      ); // smaller than maxSizeMB
+      );
 
-      // setFile(compressedFile);
-      convert(compressedFile);
+      return compressedFile;
     } catch (error) {
       console.log(error);
     }
@@ -47,25 +88,34 @@ export default function Add(props) {
   /**
    * Convert image to BASE64
    */
-  const convert = (compressedFile) => {
-    var reader = new FileReader();
-    reader.onloadend = function () {
-      setFile(reader.result);
-      console.log(reader.result);
-      console.log("set file!");
-    };
-    reader.readAsDataURL(compressedFile);
+  const convert = async (compressedFile) => {
+    return new Promise((resolve, reject) => {
+      var reader = new FileReader();
+
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+
+      reader.onerror = reject;
+
+      reader.readAsDataURL(compressedFile);
+    });
   };
+  const getImage = () => document.getElementsByClassName("ReactCrop__image")[0];
   /**
    * Upload the post
    */
   const handleCreate = async (event) => {
     if (event) event.preventDefault();
-    if (!file) {
-      setStatus("Please select an image");
+    if (!crop || (crop && !crop.width)) {
+      setStatus("Please upload and crop an image first");
       return;
-    }
-    const imageUrl = file;
+		}
+		// Crop, compress, convert to base64
+    const croppedImg = await getCroppedImg(getImage(), crop, "hello");
+    const compressedImg = await compressImg(croppedImg);
+    const convertedImg = await convert(compressedImg);
+    const imageUrl = convertedImg;
     createPost(getUser(), productUrl, imageUrl).then(
       (data) => {
         setStatus("Created post successfully!");
@@ -96,7 +146,7 @@ export default function Add(props) {
         <input
           type="file"
           accept="image/*"
-          onChange={(event) => handleImageUpload(event)}
+          onChange={handleSetImage}
           ref={fileInput}
         />
 
@@ -105,8 +155,17 @@ export default function Add(props) {
         {file && (
           <>
             <p>Crop the image to upload it</p>
-            <img src={file} />
-            <br></br>
+            <div style={{ width: "40rem" }} id="test">
+              <ReactCrop
+                src={file}
+                crop={crop}
+                style={{ position: "relative" }}
+                onChange={(newCrop) => {
+                  setCrop(newCrop);
+                }}
+              />
+              <br />
+            </div>
           </>
         )}
 

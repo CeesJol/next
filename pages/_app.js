@@ -4,6 +4,7 @@ import Head from "next/head";
 import UserContextProvider from "../contexts/userContext";
 
 import "../styles/index.scss";
+import 'react-image-crop/lib/ReactCrop.scss';
 
 class MyApp extends App {
   render() {
