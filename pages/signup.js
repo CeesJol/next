@@ -29,7 +29,9 @@ export default function Signup() {
           id,
           secret: res.secret,
           email,
-        });
+				});
+				console.log('conf', id, email)
+				sendConfirmationEmail(id, email);
         getUserByEmail(email).then(
           (data) => {
             console.log("getUserByEmail", data);
@@ -54,8 +56,7 @@ export default function Signup() {
     setStatus("Creating account...");
     await signup(email, username, password).then(
       (res) => {
-				await handleLogin();
-				sendConfirmationEmail(id, email);
+				handleLogin();
       },
       (err) => {
         setStatus(`Signup failed: ${err}`);
