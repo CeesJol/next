@@ -8,7 +8,7 @@ const server = new faunadb.Client({ secret });
  *  | AUTHENTICATE
  *  |----------------------------
  */
-export const login = (email, password) => {
+export const login = async (email, password) => {
   const validationError = validateLogin(email, password);
   if (validationError) return Promise.reject(validationError);
   return server.query(
@@ -22,7 +22,7 @@ export const login = (email, password) => {
  *  | LOG OUT
  *  |----------------------------
  */
-export const logout = (secret) => {
+export const logout = async (secret) => {
   const client = new faunadb.Client({ secret });
   return client.query(q.Logout(false));
 };
@@ -31,7 +31,7 @@ export const logout = (secret) => {
  *  | CREATE ACCOUNT
  *  |----------------------------
  */
-export const signup = (email, username, password) => {
+export const signup = async (email, username, password) => {
   const validationError = validateSignup(email, username, password);
   if (validationError) return Promise.reject(validationError);
   return server.query(
@@ -51,7 +51,7 @@ export const signup = (email, username, password) => {
  *  | VALIDATE USER'S SECRET
  *  |----------------------------
  */
-export const identity = (secret) => {
+export const identity = async (secret) => {
   const client = new faunadb.Client({ secret });
   return client.query(q.Identity());
 };
@@ -60,7 +60,7 @@ export const identity = (secret) => {
  *  | UPDATE USER'S PASSWORD
  *  |----------------------------
  */
-export const updatePassword = (id, newPassword) => {
+export const updatePassword = async (id, newPassword) => {
   return server.query(
     q.Update(q.Ref(q.Collection("User"), id), {
       credentials: { password: newPassword },

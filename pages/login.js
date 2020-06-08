@@ -14,10 +14,10 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { userExists, storeUser, userUnauthenticated } = useContext(UserContext);
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     if (event) event.preventDefault();
     setStatus("Authenticating...");
-    login(email, password).then(
+    await login(email, password).then(
       (res) => {
 				setStatus("Login succeeded!");
 				console.log(res.instance.value);

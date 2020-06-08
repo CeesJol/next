@@ -21,6 +21,10 @@
 		background-color: lighten($light-green, 7%);
 	}
 
+	&:disabled {
+		background-color: darken($light-green, 30%);
+	}
+
 	&--shadow {
 		@include shadow;
 	}

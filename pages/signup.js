@@ -18,10 +18,10 @@ export default function Signup() {
   const { userExists, storeUser, userUnauthenticated } = useContext(
     UserContext
   );
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     if (event) event.preventDefault();
     setStatus("Authenticating...");
-    login(email, password).then(
+    await login(email, password).then(
       (res) => {
         setStatus("Login succeeded!");
         const id = res.instance.value.id;
@@ -49,12 +49,12 @@ export default function Signup() {
       }
     );
   };
-  const handleSignUp = (event) => {
+  const handleSignUp = async (event) => {
     if (event) event.preventDefault();
     setStatus("Creating account...");
-    signup(email, username, password).then(
+    await signup(email, username, password).then(
       (res) => {
-				handleLogin();
+				await handleLogin();
 				sendConfirmationEmail(id, email);
       },
       (err) => {

@@ -26,7 +26,7 @@ export default () => {
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
   };
-  const handleSave = (event) => {
+  const handleSave = async (event) => {
     if (event) event.preventDefault();
     const validationError = validateUpdate(username, email, website);
     if (validationError) {
@@ -35,7 +35,7 @@ export default () => {
     }
     console.log("website", website);
     const user = getUser();
-    updateUser(user.id, username, email, website).then(
+    await updateUser(user.id, username, email, website).then(
       (data) => {
         if (data == -1) {
           setStatus("That username is already taken");
@@ -64,14 +64,14 @@ export default () => {
       }
     );
   };
-  const handleSavePassword = (event) => {
+  const handleSavePassword = async (event) => {
     if (event) event.preventDefault();
     const validationError = validatePassword(password);
     if (validationError) {
       setStatus2(validationError);
       return false;
     }
-    updatePassword(getUser().id, password).then(
+    await updatePassword(getUser().id, password).then(
       (data) => {
         setStatus2("Updated successfully!");
       },

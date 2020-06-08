@@ -140,9 +140,10 @@ export default function Add(props) {
     const compressedImg = await compressImg(croppedImg);
     const convertedImg = await convert(compressedImg);
     const imageUrl = convertedImg;
-    createPost(getUser(), productUrl, imageUrl).then(
+    await createPost(getUser(), productUrl, imageUrl).then(
       (data) => {
-        setStatus("Created post successfully!");
+				setStatus("Created post successfully!");
+				console.log("Created post")
 
         // Reset state
         resetForm();
