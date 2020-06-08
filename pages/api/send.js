@@ -9,8 +9,8 @@ export default async function(req, res) {
   const { email, message } = req.body
 
   const content = {
-    to: process.env.NODE_ENV != 'development' ? email : 'cjol99@icloud.com',
-    from: 'cjol99@icloud.com',
+    to: process.env.NODE_ENV != 'development' ? email : process.env.FROM_EMAIL,
+    from: process.env.FROM_EMAIL,
     subject: `Confirm your account on Affilas`,
     text: message,
     html: `<p>${message}</p>`
