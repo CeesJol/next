@@ -19,6 +19,28 @@ export default function Add(props) {
     setCrop({ aspect: 1 });
     setFile(await convert(event.target.files[0]));
   };
+  const resetForm = () => {
+    setProductUrl("");
+    setStatus("");
+    setFile(null);
+		setCrop({ aspect: 1 });
+		clearInputFile(document.getElementById("image"));
+  };
+  function clearInputFile(f) {
+    if (f.value) {
+      try {
+        f.value = ""; //for IE11, latest Chrome/Firefox/Opera...
+      } catch (err) {}
+      if (f.value) {
+        //for IE5 ~ IE10
+        var form = document.createElement("form"),
+          ref = f.nextSibling;
+        form.appendChild(f);
+        form.reset();
+        ref.parentNode.insertBefore(f, ref);
+      }
+    }
+  }
   /**
    * Crop image
    * @param {HTMLImageElement} image - Image File Object
@@ -74,6 +96,8 @@ export default function Add(props) {
       maxWidthOrHeight: 1920,
       useWebWorker: true,
     };
+    // 100x smaller images in production
+    if (process.env.NODE_ENV == "development") options.maxSizeMB = 0.0005;
     try {
       const compressedFile = await imageCompression(imageFile, options);
       console.log(
@@ -110,24 +134,27 @@ export default function Add(props) {
     if (!crop || (crop && !crop.width)) {
       setStatus("Please upload and crop an image first");
       return;
-		}
-		// Crop, compress, convert to base64
+    }
+    // Crop, compress, convert to base64
     const croppedImg = await getCroppedImg(getImage(), crop, "hello");
     const compressedImg = await compressImg(croppedImg);
     const convertedImg = await convert(compressedImg);
     const imageUrl = convertedImg;
-    createPost(getUser(), productUrl, imageUrl).then(
-      (data) => {
-        setStatus("Created post successfully!");
+    // createPost(getUser(), productUrl, imageUrl).then(
+    //   (data) => {
+    setStatus("Created post successfully!");
 
-        // Communicate refresh to Dashboard (parent)
-        props.fn();
-      },
-      (err) => {
-        setStatus("Something went wrong. Please try again later");
-        console.log("err", err);
-      }
-    );
+    // Reset state
+    resetForm();
+
+    // Communicate refresh to Dashboard (parent)
+    props.fn();
+    // },
+    // (err) => {
+    //   setStatus("Something went wrong. Please try again later");
+    //   console.log("err", err);
+    // }
+    // );
   };
   return (
     <div className="dashboard__create">
@@ -144,7 +171,8 @@ export default function Add(props) {
 
         <label>Image</label>
         <input
-          type="file"
+					type="file"
+					id="image"
           accept="image/*"
           onChange={handleSetImage}
           ref={fileInput}
