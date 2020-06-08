@@ -23,8 +23,8 @@ export default function Add(props) {
     setProductUrl("");
     setStatus("");
     setFile(null);
-		setCrop({ aspect: 1 });
-		clearInputFile(document.getElementById("image"));
+    setCrop({ aspect: 1 });
+    clearInputFile(document.getElementById("image"));
   };
   function clearInputFile(f) {
     if (f.value) {
@@ -140,21 +140,21 @@ export default function Add(props) {
     const compressedImg = await compressImg(croppedImg);
     const convertedImg = await convert(compressedImg);
     const imageUrl = convertedImg;
-    // createPost(getUser(), productUrl, imageUrl).then(
-    //   (data) => {
-    setStatus("Created post successfully!");
+    createPost(getUser(), productUrl, imageUrl).then(
+      (data) => {
+        setStatus("Created post successfully!");
 
-    // Reset state
-    resetForm();
+        // Reset state
+        resetForm();
 
-    // Communicate refresh to Dashboard (parent)
-    props.fn();
-    // },
-    // (err) => {
-    //   setStatus("Something went wrong. Please try again later");
-    //   console.log("err", err);
-    // }
-    // );
+        // Communicate refresh to Dashboard (parent)
+        props.fn();
+      },
+      (err) => {
+        setStatus("Something went wrong. Please try again later");
+        console.log("err", err);
+      }
+    );
   };
   return (
     <div className="dashboard__create">
@@ -171,8 +171,8 @@ export default function Add(props) {
 
         <label>Image</label>
         <input
-					type="file"
-					id="image"
+          type="file"
+          id="image"
           accept="image/*"
           onChange={handleSetImage}
           ref={fileInput}
