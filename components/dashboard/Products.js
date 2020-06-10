@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "../../components/user/Post";
+import Product from "../../components/user/Product";
 
 export default (props) => {
   function drawItems() {
@@ -10,22 +10,22 @@ export default (props) => {
     if (error || data === -1) return <p>Failed to load</p>;
     if (!data.userByEmail) return <p>404 - user not found</p>;
 
-    const posts = data.userByEmail.posts.data;
+    const products = data.userByEmail.products.data;
 
-    if (posts.length > 0)
+    if (products.length > 0)
       return (
         <>
           <p>Click on any product to edit it</p>
-          {posts.map((post, i) => (
-            <Post
+          {products.map((product, i) => (
+            <Product
               key={i}
-              imageUrl={post.imageUrl}
-              productUrl={post.productUrl}
-              post={post}
+              imageUrl={product.imageUrl}
+              productUrl={product.productUrl}
+              product={product}
               handleClick={props.handleClick}
             >
               asfd
-            </Post>
+            </Product>
           ))}
         </>
       );
@@ -35,7 +35,7 @@ export default (props) => {
   return (
     <div className="dashboard__products">
       <h4>Your products</h4>
-      <div id="posts-container">{drawItems()}</div>
+      <div id="products-container">{drawItems()}</div>
     </div>
   );
 };

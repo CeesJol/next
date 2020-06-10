@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Button from "../Button";
-import { updatePost, deletePost } from "../../pages/api/fauna";
+import { updateProduct, deleteProduct } from "../../pages/api/fauna";
 
 export default function Edit(props) {
   const [productUrl, setProductUrl] = useState("");
@@ -9,7 +9,7 @@ export default function Edit(props) {
   };
   const handleSave = async (event) => {
     if (event) event.preventDefault();
-    await updatePost(props.post._id, productUrl, props.post.imageUrl).then(
+    await updateProduct(props.product._id, productUrl, props.product.imageUrl).then(
       (data) => {
         // Communicate refresh to Dashboard (parent)
         props.fn();
@@ -21,7 +21,7 @@ export default function Edit(props) {
   };
   const handleDelete = async (event) => {
     if (event) event.preventDefault();
-    await deletePost(props.post._id).then(
+    await deleteProduct(props.product._id).then(
       (data) => {
         // Communicate refresh to Dashboard (parent)
         props.fn();
@@ -32,8 +32,8 @@ export default function Edit(props) {
     );
   };
   useEffect(() => {
-    const post = props.post;
-    setProductUrl(post.productUrl);
+    const product = props.product;
+    setProductUrl(product.productUrl);
   }, []);
   return (
     <>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import imageCompression from "browser-image-compression";
 import ReactCrop from "react-image-crop";
 import Button from "../Button";
-import { createPost } from "../../pages/api/fauna";
+import { createProduct } from "../../pages/api/fauna";
 import { UserContext } from "../../contexts/userContext";
 import { validateWebsite } from "../../lib/validate"
 
@@ -128,7 +128,7 @@ export default function Add(props) {
   };
   const getImage = () => document.getElementsByClassName("ReactCrop__image")[0];
   /**
-   * Upload the post
+   * Upload the product
    */
   const handleCreate = async (event) => {
     if (event) event.preventDefault();
@@ -146,10 +146,10 @@ export default function Add(props) {
     const compressedImg = await compressImg(croppedImg);
     const convertedImg = await convert(compressedImg);
     const imageUrl = convertedImg;
-    await createPost(getUser(), productUrl, imageUrl).then(
+    await createProduct(getUser(), productUrl, imageUrl).then(
       (data) => {
-				setStatus("Created post successfully!");
-				console.log("Created post")
+				setStatus("Created product successfully!");
+				console.log("Created product")
 
         // Reset state
         resetForm();

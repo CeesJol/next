@@ -1,8 +1,8 @@
-import { getUserPosts } from "./api/fauna";
+import { getUserProducts } from "./api/fauna";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import UserLayout from "../components/user/UserLayout";
-import Post from "../components/user/Post";
+import Product from "../components/user/Product";
 
 export default function User() {
   const [data, setData] = useState(false);
@@ -13,7 +13,7 @@ export default function User() {
   useEffect(() => {
     if (username && !data && !error) {
       console.log(`Req for ${username}`);
-      getUserPosts(username).then(
+      getUserProducts(username).then(
         (data) => {
           setData(data);
         },
@@ -31,16 +31,16 @@ export default function User() {
 		if (!data.user.confirmed) return <p>Confirm your email address to see your store live</p>
     if (error || data === -1) return <p>Failed to load</p>;
 
-    const posts = data.user.posts.data;
+    const products = data.user.products.data;
 
-    if (posts.length > 0)
+    if (products.length > 0)
       return (
         <>
           <p>Press any image to learn more</p>
-          {posts.map((post, i) => (
-            <Post key={i} imageUrl={post.imageUrl} productUrl={post.productUrl}>
+          {products.map((product, i) => (
+            <Product key={i} imageUrl={product.imageUrl} productUrl={product.productUrl}>
               asfd
-            </Post>
+            </Product>
           ))}
         </>
       );
@@ -51,7 +51,7 @@ export default function User() {
     <UserLayout name={username}>
       <div className="usercontainer">
         <div className="user">
-          <div id="posts-container">{drawItems()}</div>
+          <div id="products-container">{drawItems()}</div>
         </div>
       </div>
     </UserLayout>

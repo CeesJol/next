@@ -1,15 +1,15 @@
 import executeQuery from "../../lib/executeQuery";
 
 /** |----------------------------
- *  | GET POSTS BY USERNAME
+ *  | GET PRODUCTS BY USERNAME
  *  |----------------------------
  */
-export const getUserPosts = async (username) => {
+export const getUserProducts = async (username) => {
 	username = username.toLowerCase();
-  return executeQuery(`query FindPostsByID {
+  return executeQuery(`query FindProductsByID {
 		user(username: "${username}") {
 			confirmed
-			posts {
+			products {
 				data {
 					_id
 					imageUrl
@@ -34,13 +34,13 @@ export const getUserByEmail = async (email) => {
 };
 
 /** |----------------------------
- *  | GET POSTS BY EMAIL
+ *  | GET PRODUCTS BY EMAIL
  *  |----------------------------
  */
-export const getUserPostsByEmail = async (email) => {
-  return executeQuery(`query FindPostsByEmail {
+export const getUserProductsByEmail = async (email) => {
+  return executeQuery(`query FindProductsByEmail {
 		userByEmail(email: "${email}") {
-			posts {
+			products {
 				data {
 					_id
 					productUrl
@@ -52,12 +52,12 @@ export const getUserPostsByEmail = async (email) => {
 };
 
 /** |----------------------------
- *  | CREATE POST
+ *  | CREATE PRODUCT
  *  |----------------------------
  */
-export const createPost = async (user, productUrl, imageUrl) => {
-  return executeQuery(`mutation CreatePost {
-		createPost(data: {
+export const createProduct = async (user, productUrl, imageUrl) => {
+  return executeQuery(`mutation CreateProduct {
+		createProduct(data: {
 			imageUrl: "${imageUrl}"
 			productUrl: "${productUrl}"
 			user: { connect: "${user.id}" }
@@ -69,12 +69,12 @@ export const createPost = async (user, productUrl, imageUrl) => {
 };
 
 /** |----------------------------
- *  | UPDATE POST
+ *  | UPDATE PRODUCT
  *  |----------------------------
  */
-export const updatePost = async (id, productUrl, imageUrl) => {
-  return executeQuery(`mutation UpdatePost {
-		updatePost(id: "${id}", data:{
+export const updateProduct = async (id, productUrl, imageUrl) => {
+  return executeQuery(`mutation UpdateProduct {
+		updateProduct(id: "${id}", data:{
 			imageUrl: "${imageUrl}"
 			productUrl: "${productUrl}"
 		}) {
@@ -85,12 +85,12 @@ export const updatePost = async (id, productUrl, imageUrl) => {
 };
 
 /** |----------------------------
- *  | DELETE POST
+ *  | DELETE PRODUCT
  *  |----------------------------
  */
-export const deletePost = async (id) => {
-  return executeQuery(`mutation DeletePost {
-		deletePost(id: "${id}") {
+export const deleteProduct = async (id) => {
+  return executeQuery(`mutation DeleteProduct {
+		deleteProduct(id: "${id}") {
 			imageUrl
 			productUrl
 		}

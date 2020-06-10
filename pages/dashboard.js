@@ -7,14 +7,14 @@ import Product from "../components/dashboard/Product";
 import Products from "../components/dashboard/Products";
 import Settings from "../components/dashboard/Settings";
 import { UserContext } from "../contexts/userContext";
-import { getUserPostsByEmail } from "./api/fauna";
+import { getUserProductsByEmail } from "./api/fauna";
 
 export default function Dashboard(props) {
   const [data, setData] = useState(false);
   const [error, setError] = useState(false);
   const [req, setReq] = useState(false);
   const [nav, setNav] = useState(0); // 0 = main, 1 = settings
-  const [editingPost, setEditingPost] = useState(-1);
+  const [editingProduct, setEditingProduct] = useState(-1);
   const { userExists, getUser, userUnauthenticated } = useContext(UserContext);
 
   useEffect(() => {
@@ -24,29 +24,29 @@ export default function Dashboard(props) {
 
     if (!req && getUser() && getUser().email && !data && !error) {
       setReq(true);
-      getPosts();
+      getProducts();
     }
   });
-  function getPosts() {
+  function getProducts() {
     const user = getUser();
     console.log(`Req for ${user.email}`);
-    getUserPostsByEmail(user.email).then(
+    getUserProductsByEmail(user.email).then(
       (data) => {
         setData(data);
       },
       (error) => {
-        console.log("getposts error", error);
+        console.log("getproducts error", error);
         setError(error);
       }
     );
   }
-  function handleClick(e, post) {
+  function handleClick(e, product) {
     e.preventDefault();
-    setEditingPost(post);
+    setEditingProduct(product);
   }
   function handleMutation() {
-    getPosts();
-    setEditingPost(-1);
+    getProducts();
+    setEditingProduct(-1);
   }
   return (
     <>
@@ -86,14 +86,14 @@ export default function Dashboard(props) {
                     </div>
                   )}
                   {nav == 0 &&
-                    (editingPost !== -1 ? (
+                    (editingProduct !== -1 ? (
                       <>
-                        <Edit fn={handleMutation} post={editingPost} />
+                        <Edit fn={handleMutation} product={editingProduct} />
                         <Product
                           data={data}
                           error={error}
                           handleClick={handleClick}
-                          editingPost={editingPost}
+                          editingProduct={editingProduct}
                         />
                       </>
                     ) : (
@@ -107,7 +107,7 @@ export default function Dashboard(props) {
 														{" "}live
                           </div>
                         )}
-                        <Add fn={getPosts} />
+                        <Add fn={getProducts} />
                         <Products
                           data={data}
                           error={error}
