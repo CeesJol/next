@@ -50,6 +50,8 @@
 	&__main {
 		&__content {
 			@include dashboard-content-container;
+
+			overflow: auto;
 		}
 	}
 

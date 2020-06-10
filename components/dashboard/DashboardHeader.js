@@ -7,10 +7,9 @@ import { logout } from "../../pages/api/auth";
 const DashboardHeader = () => {
   const { userExists, getUser, clearUser } = useContext(UserContext);
   const handleLogout = () => {
-    logout(getUser().secret).then((data) => {
-      clearUser();
-      Router.push("/login");
-    });
+    logout(getUser().secret);
+		clearUser();
+    Router.push("/login");
   };
   return (
     <header className="header">

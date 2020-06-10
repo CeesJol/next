@@ -1,4 +1,4 @@
-import React, { Component, createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 export const UserContext = createContext();
 
 import { identity } from "../pages/api/auth";
@@ -6,12 +6,9 @@ import { readUser } from "../pages/api/fauna";
 
 const UserContextProvider = (props) => {
   const [user, setUser] = useState(null);
-  const [userLoggedOut, setUserLoggedOut] = useState(false);
   const storeUser = (data) => {
-		// Set state
-	  setUser((prevUser) => ({ ...prevUser, ...data }));
-
-    setUserLoggedOut(false);
+    // Set state
+    setUser((prevUser) => ({ ...prevUser, ...data }));
   };
   const getUser = () => {
     return user;
@@ -20,19 +17,14 @@ const UserContextProvider = (props) => {
     // Reset localstorage
     localStorage.removeItem("user");
 
-		// Reset state
-		setUser(null);
-    setUserLoggedOut(true);
+    // Reset state
+    setUser(null);
   };
   const userExists = () => {
     return user != null;
   };
-  const userUnauthenticated = () => {
-    return userLoggedOut;
-  };
   useEffect(() => {
     if (user == null) {
-			console.log('no user')
       const localUser = JSON.parse(localStorage.getItem("user"));
       if (localUser != null) {
         identity(localUser.secret).then(
@@ -50,29 +42,28 @@ const UserContextProvider = (props) => {
             );
           },
           (err) => {
-						// Database denies that user is logged in!
-						console.log("localUser", localUser)
+            // Database denies that user is logged in!
+            console.log("localUser", localUser);
             console.log("Your secret is fake news", err);
             clearUser();
           }
         );
       } else {
-				// There is no user data
+        // There is no user data
         clearUser();
       }
-		}
-		
-		// Set localstorage
+    }
+
+    // Set localstorage
     localStorage.setItem("user", JSON.stringify(user));
-  }, [user, userLoggedOut]);
+  }, [user]);
   return (
     <UserContext.Provider
       value={{
         storeUser,
         getUser,
         clearUser,
-        userExists,
-        userUnauthenticated,
+				userExists
       }}
     >
       {props.children}

@@ -8,21 +8,34 @@ import Products from "../components/dashboard/Products";
 import Settings from "../components/dashboard/Settings";
 import { UserContext } from "../contexts/userContext";
 import { getUserProductsByEmail } from "./api/fauna";
+import { identity } from "./api/auth";
 
 export default function Dashboard(props) {
   const [data, setData] = useState(false);
   const [error, setError] = useState(false);
-  const [req, setReq] = useState(false);
+	const [req, setReq] = useState(false);
+	const [auth, setAuth] = useState(false);
   const [nav, setNav] = useState(0); // 0 = main, 1 = settings
   const [editingProduct, setEditingProduct] = useState(-1);
-  const { userExists, getUser, userUnauthenticated } = useContext(UserContext);
+  const { getUser, clearUser } = useContext(UserContext);
 
   useEffect(() => {
-    if (userUnauthenticated()) {
-      Router.push("/login");
-    }
+		const user = getUser();
+    if (!auth && user && user.secret) {
+      identity(user.secret).then(
+        (data) => {
+					console.log("id data", data);
+					setAuth(true);
+        },
+        (err) => {
+					console.log("id err", err);
+					clearUser();
+					Router.push("/login");
+        }
+      );
+		}
 
-    if (!req && getUser() && getUser().email && !data && !error) {
+    if (!req && user && user.email && !data && !error) {
       setReq(true);
       getProducts();
     }
@@ -50,7 +63,7 @@ export default function Dashboard(props) {
   }
   return (
     <>
-      {userExists() && !userUnauthenticated() && (
+      {auth ? (
         <div className="dashboard-container">
           <DashboardHeader />
           <main>
@@ -80,7 +93,7 @@ export default function Dashboard(props) {
 
               <div className="dashboard__main">
                 <div className="dashboard__main__content">
-                  {userExists() && getUser().confirmed == false && (
+                  {getUser() && getUser().confirmed == false && (
                     <div className="dashboard__confirm">
                       Confirm your email address to see your store live
                     </div>
@@ -98,13 +111,13 @@ export default function Dashboard(props) {
                       </>
                     ) : (
                       <>
-                        {userExists() && getUser().confirmed == true && (
+                        {getUser() && getUser().confirmed == true && (
                           <div className="dashboard__live">
                             View{" "}
                             <a href={getUser().username} target="_blank">
                               your store
-                            </a>
-														{" "}live
+                            </a>{" "}
+                            live
                           </div>
                         )}
                         <Add fn={getProducts} />
@@ -121,7 +134,9 @@ export default function Dashboard(props) {
             </div>
           </main>
         </div>
-      )}
+      ) : (
+				<p>Authenticating...</p>
+			)}
     </>
   );
 }

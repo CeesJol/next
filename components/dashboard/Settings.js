@@ -33,7 +33,6 @@ export default () => {
       setStatus(validationError);
       return;
     }
-    console.log("website", website);
     const user = getUser();
     await updateUser(user.id, username, email, website).then(
       (data) => {
@@ -86,7 +85,7 @@ export default () => {
       const user = getUser();
       setUsername(user.username);
       setEmail(user.email);
-      setWebsite(user.website);
+      setWebsite(user.website ? user.website : "");
     }
   });
 
