@@ -16,7 +16,7 @@ const Splash = () => (
               </h1>
               <p>
 								Affilas allows you to build a store and start earning with
-                your Instagram page in minutes
+                your Instagram page in minutes.
               </p>
             </div>
             <footer>
