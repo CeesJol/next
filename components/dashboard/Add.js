@@ -4,6 +4,7 @@ import ReactCrop from "react-image-crop";
 import Button from "../Button";
 import { createPost } from "../../pages/api/fauna";
 import { UserContext } from "../../contexts/userContext";
+import { validateWebsite } from "../../lib/validate"
 
 export default function Add(props) {
   const [productUrl, setProductUrl] = useState("");
@@ -134,7 +135,12 @@ export default function Add(props) {
     if (!crop || (crop && !crop.width)) {
       setStatus("Please upload and crop an image first");
       return;
-    }
+		}
+		const validationError = validateWebsite(productUrl);
+		if (validationError) {
+			setStatus(validationError);
+			return;
+		}
     // Crop, compress, convert to base64
     const croppedImg = await getCroppedImg(getImage(), crop, "hello");
     const compressedImg = await compressImg(croppedImg);

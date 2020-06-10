@@ -31,15 +31,15 @@ export default () => {
     const validationError = validateUpdate(username, email, website);
     if (validationError) {
       setStatus(validationError);
-      return false;
+      return;
     }
     console.log("website", website);
     const user = getUser();
     await updateUser(user.id, username, email, website).then(
       (data) => {
         if (data == -1) {
-          setStatus("That username is already taken");
-          return false;
+          setStatus("That username or email is already taken");
+          return;
         }
 
 				// If email changed, set confirmed to false and 
