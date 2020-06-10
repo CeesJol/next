@@ -23,7 +23,7 @@ export default (props) => {
 				</Post>
       );
     }
-    return <p>Nothing to see here</p>;
+    return <p>Add a product to get started with your store</p>;
   }
 
   return (

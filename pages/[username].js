@@ -44,7 +44,7 @@ export default function User() {
           ))}
         </>
       );
-    return <p>Nothing to see here</p>;
+    return <p>This user has no products yet</p>;
   }
 
   return (

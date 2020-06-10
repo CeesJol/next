@@ -23,7 +23,7 @@ export default function Token() {
         },
         (err) => {
           console.log("err", err);
-          setStatus("You fucked up! " + err);
+          setStatus("Something went wrong. Please contact us for help. " + err);
         }
       );
     }
