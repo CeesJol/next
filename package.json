@@ -10,21 +10,13 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^7.1.1",
-    "apollo-server-micro": "^2.13.1",
     "browser-image-compression": "^1.0.12",
     "faunadb": "^2.14.1",
-    "graphql": "^15.0.0",
     "jsonwebtoken": "^8.5.1",
     "next": "^9.4.2",
-    "next-redux-wrapper": "^6.0.0",
-    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-image-crop": "^8.6.4",
-    "react-native": "^0.62.2",
-    "react-redux": "^7.2.0",
-    "redux": "^4.0.5",
-    "sass": "^1.26.5",
-    "swr": "^0.2.2"
+    "sass": "^1.26.8"
   }
 }
