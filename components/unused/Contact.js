@@ -1,6 +1,6 @@
 import React from "react"
 
-import Wave from "./Wave"
+import Wave from "../Wave"
 
 const Contact = () => (
   <div className="container contact">

@@ -1,7 +1,7 @@
 import React from "react";
 
-import Wave from "./Wave";
-import Button from "./Button";
+import Wave from "../general/Wave";
+import Button from "../general/Button";
 
 const Arguments = () => (
   <>

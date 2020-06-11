@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import ReactCrop from "react-image-crop";
-import Button from "../Button";
+import Button from "../general/Button";
 import { clearInputFile, getCroppedImg, compressImg, convert } from "../../lib/image";
 import { createProduct } from "../../pages/api/fauna";
 import { UserContext } from "../../contexts/userContext";

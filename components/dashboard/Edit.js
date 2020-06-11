@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import Button from "../Button";
+import Button from "../general/Button";
 import { updateProduct, deleteProduct } from "../../pages/api/fauna";
 import { DashboardContext } from "../../contexts/dashboardContext";
 

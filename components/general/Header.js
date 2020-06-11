@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import Link from "next/link";
-import { UserContext } from "../contexts/userContext";
+import { UserContext } from "../../contexts/userContext";
 
 const Header = ({ transparentHeader = false }) => {
   const { getUser, userExists } = useContext(UserContext);

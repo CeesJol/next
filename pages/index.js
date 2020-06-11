@@ -1,13 +1,13 @@
 import React from "react";
 
-import Arguments from "../components/Arguments";
-import Intro from "../components/Intro";
-import CTA from "../components/CTA";
-import Idea from "../components/Idea";
-import Niche from "../components/Niche";
-import Splash from "../components/Splash";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Arguments from "../components/index/Arguments";
+import Intro from "../components/index/Intro";
+import CTA from "../components/index/CTA";
+import Idea from "../components/index/Idea";
+import Niche from "../components/index/Niche";
+import Splash from "../components/index/Splash";
+import Header from "../components/general/Header";
+import Footer from "../components/general/Footer";
 
 const IndexPage = () => {
   return (
@@ -19,7 +19,6 @@ const IndexPage = () => {
         <Idea />
         <Arguments />
         <Niche />
-        {/* <Contact /> */}
         <CTA />
       </main>
       <Footer />

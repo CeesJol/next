@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import Button from "../Button";
+import Button from "../general/Button";
 import { updateUser } from "../../pages/api/fauna";
 import { updatePassword } from "../../pages/api/auth";
 import { disconfirmUser, sendConfirmationEmail } from "../../pages/api/confirm";

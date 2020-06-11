@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Router from "next/router";
 import Link from "next/link";
 
-import Button from "../components/Button";
+import Button from "../components/general/Button";
 
 import { login } from "./api/auth";
 import { getUserByEmail } from "./api/fauna";
