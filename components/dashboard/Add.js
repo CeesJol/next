@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import imageCompression from "browser-image-compression";
 import ReactCrop from "react-image-crop";
 import Button from "../Button";
 import { createProduct } from "../../pages/api/fauna";
 import { UserContext } from "../../contexts/userContext";
-import { validateWebsite } from "../../lib/validate"
+import { validateWebsite } from "../../lib/validate";
 
 export default function Add(props) {
   const [productUrl, setProductUrl] = useState("");
@@ -135,12 +135,12 @@ export default function Add(props) {
     if (!crop || (crop && !crop.width)) {
       setStatus("Please upload and crop an image first");
       return;
-		}
-		const validationError = validateWebsite(productUrl);
-		if (validationError) {
-			setStatus(validationError);
-			return;
-		}
+    }
+    const validationError = validateWebsite(productUrl);
+    if (validationError) {
+      setStatus(validationError);
+      return;
+    }
     // Crop, compress, convert to base64
     const croppedImg = await getCroppedImg(getImage(), crop, "hello");
     const compressedImg = await compressImg(croppedImg);
@@ -148,8 +148,8 @@ export default function Add(props) {
     const imageUrl = convertedImg;
     await createProduct(getUser(), productUrl, imageUrl).then(
       (data) => {
-				setStatus("Created product successfully!");
-				console.log("Created product")
+        setStatus("Created product successfully!");
+        console.log("Created product");
 
         // Reset state
         resetForm();

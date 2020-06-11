@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Product from "../../components/user/Product";
+import { DashboardContext } from "../../contexts/dashboardContext";
 
 export default (props) => {
+	const { editingProduct } = useContext(DashboardContext);
   function drawItem(drawProduct) {
     const data = props.data;
 		const error = props.error;
@@ -30,7 +32,7 @@ export default (props) => {
     <div className="dashboard__preview">
       <h4>Preview</h4>
 			<p>Preview of the product</p>
-      {drawItem(props.editingProduct)}
+      {drawItem(editingProduct)}
     </div>
   );
 };

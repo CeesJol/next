@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import Button from "../Button";
 import { updateProduct, deleteProduct } from "../../pages/api/fauna";
+import { DashboardContext } from "../../contexts/dashboardContext";
 
 export default function Edit(props) {
-  const [productUrl, setProductUrl] = useState("");
+	const [productUrl, setProductUrl] = useState("");
+	const { nav, editingProduct, setEditingProduct } = useContext(DashboardContext);
   const handleChangeProductUrl = (event) => {
     setProductUrl(event.target.value);
   };
   const handleSave = async (event) => {
     if (event) event.preventDefault();
-    await updateProduct(props.product._id, productUrl, props.product.imageUrl).then(
+    await updateProduct(editingProduct._id, productUrl, editingProduct.imageUrl).then(
       (data) => {
         // Communicate refresh to Dashboard (parent)
         props.fn();
@@ -21,7 +23,7 @@ export default function Edit(props) {
   };
   const handleDelete = async (event) => {
     if (event) event.preventDefault();
-    await deleteProduct(props.product._id).then(
+    await deleteProduct(editingProduct._id).then(
       (data) => {
         // Communicate refresh to Dashboard (parent)
         props.fn();
@@ -32,8 +34,8 @@ export default function Edit(props) {
     );
   };
   useEffect(() => {
-    const product = props.product;
-    setProductUrl(product.productUrl);
+    const product = editingProduct;
+    setProductUrl(editingProduct.productUrl);
   }, []);
   return (
     <>
