@@ -3,9 +3,7 @@ import Product from "../../components/user/Product";
 import { DashboardContext } from "../../contexts/dashboardContext";
 
 export default (props) => {
-  const { editingProduct, data, error, handleClick } = useContext(
-    DashboardContext
-  );
+  const { editingProduct, data, error } = useContext(DashboardContext);
   function drawItem(drawProduct) {
     if (!data) return <p>Loading...</p>;
     if (error || data === -1) return <p>Failed to load</p>;

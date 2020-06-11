@@ -10,22 +10,15 @@ import Settings from "./Settings";
 import Nav from "./Nav";
 import { UserContext } from "../../contexts/userContext";
 import { DashboardContext } from "../../contexts/dashboardContext";
-
 import { identity } from "../../pages/api/auth";
 
 export default function Dashboard(props) {
   const [req, setReq] = useState(false);
   const [auth, setAuth] = useState(false);
   const { getUser, clearUser } = useContext(UserContext);
-  const {
-    nav,
-    editingProduct,
-    data,
-    error,
-    getProducts,
-    handleMutation,
-    handleClick,
-  } = useContext(DashboardContext);
+  const { nav, editingProduct, data, error, getProducts } = useContext(
+    DashboardContext
+  );
 
   useEffect(() => {
     const user = getUser();
@@ -43,8 +36,6 @@ export default function Dashboard(props) {
       );
     }
 
-    console.log("nav", nav);
-
     if (!req && user && user.email && !data && !error) {
       setReq(true);
       getProducts();
@@ -60,7 +51,6 @@ export default function Dashboard(props) {
               <Nav />
               <div className="dashboard__main">
                 <div className="dashboard__main__content">
-                  
                   {nav == 0 &&
                     (editingProduct !== -1 ? (
                       <>
@@ -69,7 +59,7 @@ export default function Dashboard(props) {
                       </>
                     ) : (
                       <>
-												<TopBox />
+                        <TopBox />
                         <Add />
                         <Products />
                       </>
