@@ -5,16 +5,16 @@ import { DashboardContext } from "../../contexts/dashboardContext";
 
 export default function Edit(props) {
 	const [productUrl, setProductUrl] = useState("");
-	const { nav, editingProduct, setEditingProduct } = useContext(DashboardContext);
+	const { editingProduct, handleMutation } = useContext(DashboardContext);
   const handleChangeProductUrl = (event) => {
     setProductUrl(event.target.value);
   };
   const handleSave = async (event) => {
     if (event) event.preventDefault();
     await updateProduct(editingProduct._id, productUrl, editingProduct.imageUrl).then(
-      (data) => {
+      () => {
         // Communicate refresh to Dashboard (parent)
-        props.fn();
+        handleMutation();
       },
       (err) => {
         console.log("err", err);
@@ -24,9 +24,9 @@ export default function Edit(props) {
   const handleDelete = async (event) => {
     if (event) event.preventDefault();
     await deleteProduct(editingProduct._id).then(
-      (data) => {
+      () => {
         // Communicate refresh to Dashboard (parent)
-        props.fn();
+        handleMutation();
       },
       (err) => {
         console.log("err", err);
@@ -34,7 +34,6 @@ export default function Edit(props) {
     );
   };
   useEffect(() => {
-    const product = editingProduct;
     setProductUrl(editingProduct.productUrl);
   }, []);
   return (

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext }from "react";
 import Product from "../../components/user/Product";
+import { DashboardContext } from "../../contexts/dashboardContext";
 
 export default (props) => {
+	function handleClick(e, product) {
+    e.preventDefault();
+    setEditingProduct(product);
+  }
+	const { data, error, setEditingProduct } = useContext(DashboardContext);
   function drawItems() {
-    const data = props.data;
-    const error = props.error;
-
     if (!data) return <p>Loading...</p>;
     if (error || data === -1) return <p>Failed to load</p>;
     if (!data.userByEmail) return <p>404 - user not found</p>;
@@ -22,10 +25,8 @@ export default (props) => {
               imageUrl={product.imageUrl}
               productUrl={product.productUrl}
               product={product}
-              handleClick={props.handleClick}
-            >
-              asfd
-            </Product>
+              handleClick={handleClick}
+            />
           ))}
         </>
       );

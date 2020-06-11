@@ -4,15 +4,17 @@ import ReactCrop from "react-image-crop";
 import Button from "../Button";
 import { createProduct } from "../../pages/api/fauna";
 import { UserContext } from "../../contexts/userContext";
+import { DashboardContext } from "../../contexts/dashboardContext";
 import { validateWebsite } from "../../lib/validate";
 
 export default function Add(props) {
   const [productUrl, setProductUrl] = useState("");
   const [status, setStatus] = useState("");
-  const { getUser } = useContext(UserContext);
-  const fileInput = React.createRef();
   const [file, setFile] = useState(null);
-  const [crop, setCrop] = useState({ aspect: 1 });
+	const [crop, setCrop] = useState({ aspect: 1 });
+	const fileInput = React.createRef();
+	const { getUser } = useContext(UserContext);
+	const { getProducts } = useContext(DashboardContext);
   const handleChangeProductUrl = (event) => {
     setProductUrl(event.target.value);
   };
@@ -155,7 +157,7 @@ export default function Add(props) {
         resetForm();
 
         // Communicate refresh to Dashboard (parent)
-        props.fn();
+        getProducts();
       },
       (err) => {
         setStatus("Something went wrong. Please try again later");
