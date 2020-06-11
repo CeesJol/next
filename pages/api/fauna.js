@@ -25,6 +25,7 @@ export const getUserProducts = async (username) => {
  *  |----------------------------
  */
 export const getUserByEmail = async (email) => {
+	email = email.toLowerCase();
   return executeQuery(`query FindAUserByEmail {
 		userByEmail(email: "${email}") {
 			username
@@ -38,6 +39,7 @@ export const getUserByEmail = async (email) => {
  *  |----------------------------
  */
 export const getUserProductsByEmail = async (email) => {
+	email = email.toLowerCase();
   return executeQuery(`query FindProductsByEmail {
 		userByEmail(email: "${email}") {
 			products {
@@ -102,6 +104,7 @@ export const deleteProduct = async (id) => {
  *  |----------------------------
  */
 export const updateUser = async (id, username, email, website) => {
+	email = email.toLowerCase();
 	username = username.toLowerCase();
   return executeQuery(`mutation UpdateUser {
 		updateUser(id: "${id}", data:{

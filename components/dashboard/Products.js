@@ -3,11 +3,11 @@ import Product from "../../components/user/Product";
 import { DashboardContext } from "../../contexts/dashboardContext";
 
 export default (props) => {
+	const { data, error, setEditingProduct } = useContext(DashboardContext);
 	function handleClick(e, product) {
     e.preventDefault();
     setEditingProduct(product);
   }
-	const { data, error, setEditingProduct } = useContext(DashboardContext);
   function drawItems() {
     if (!data) return <p>Loading...</p>;
     if (error || data === -1) return <p>Failed to load</p>;

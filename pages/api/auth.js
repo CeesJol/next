@@ -9,6 +9,7 @@ const server = new faunadb.Client({ secret });
  *  |----------------------------
  */
 export const login = async (email, password) => {
+	email = email.toLowerCase();
   const validationError = validateLogin(email, password);
   if (validationError) return Promise.reject(validationError);
   return server.query(
@@ -32,6 +33,8 @@ export const logout = async (secret) => {
  *  |----------------------------
  */
 export const signup = async (email, username, password) => {
+	email = email.toLowerCase();
+	username = username.toLowerCase();
   const validationError = validateSignup(email, username, password);
   if (validationError) return Promise.reject(validationError);
   return server.query(

@@ -13,10 +13,10 @@ export default function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { userExists, storeUser, setAuth } = useContext(UserContext);
-  const handleLogin = async (event) => {
+  const handleLogin = (event) => {
     if (event) event.preventDefault();
     setStatus("Authenticating...");
-    await login(email, password).then(
+    login(email, password).then(
       (res) => {
         setStatus("Login succeeded!");
         setAuth(true);
@@ -48,10 +48,10 @@ export default function Signup() {
       }
     );
   };
-  const handleSignUp = async (event) => {
+  const handleSignUp = (event) => {
     if (event) event.preventDefault();
     setStatus("Creating account...");
-    await signup(email, username, password).then(
+    signup(email, username, password).then(
       (res) => {
         handleLogin();
       },
@@ -61,15 +61,16 @@ export default function Signup() {
     );
   };
   const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
+    setEmail(event.target.value.toLowerCase());
   };
   const handleChangeUsername = (event) => {
-    setUsername(event.target.value);
+    setUsername(event.target.value.toLowerCase());
   };
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
   };
   useEffect(() => {
+		console.log('useEffect')
     if (userExists()) {
       // User is already logged in
       Router.push("/dashboard");
@@ -78,6 +79,7 @@ export default function Signup() {
 
   return (
     <div className="login">
+			{console.log('fucking RENDERRRR')}
       <div className="login__box">
         <div className="login__box__content">
           <form>

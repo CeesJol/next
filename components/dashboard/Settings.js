@@ -18,7 +18,7 @@ export default () => {
     setUsername(event.target.value.toLowerCase());
   };
   const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
+    setEmail(event.target.value.toLowerCase());
   };
   const handleChangeWebsite = (event) => {
     setWebsite(event.target.value);

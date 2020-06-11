@@ -42,7 +42,7 @@ export default function Login() {
     );
   };
   const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
+    setEmail(event.target.value.toLowerCase());
   };
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
