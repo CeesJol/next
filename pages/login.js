@@ -1,26 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
 import Router from "next/router";
 import Link from "next/link";
-
 import Button from "../components/general/Button";
-
 import { login } from "./api/auth";
 import { getUserByEmail } from "./api/fauna";
-
 import { UserContext } from "../contexts/userContext";
 
 export default function Login() {
   const [status, setStatus] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { userExists, storeUser } = useContext(UserContext);
+  const { userExists, storeUser, setAuth } = useContext(UserContext);
   const handleLogin = async (event) => {
     if (event) event.preventDefault();
     setStatus("Authenticating...");
     await login(email, password).then(
       (res) => {
 				setStatus("Login succeeded!");
-				console.log(res.instance.value);
+				console.log('res.instance.value', res.instance.value);
+				setAuth(true);
 				const id = res.instance.value.id;
         storeUser({
           id,

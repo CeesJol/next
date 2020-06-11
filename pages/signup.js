@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import Router from "next/router";
 import Link from "next/link";
-
 import Button from "../components/general/Button";
-
 import { login, signup } from "./api/auth";
 import { getUserByEmail } from "./api/fauna";
 import { sendConfirmationEmail } from "./api/confirm";
-
 import { UserContext } from "../contexts/userContext";
 
 export default function Signup() {
@@ -15,23 +12,23 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { userExists, storeUser } = useContext(
-    UserContext
-  );
+  const { userExists, storeUser, setAuth } = useContext(UserContext);
   const handleLogin = async (event) => {
     if (event) event.preventDefault();
     setStatus("Authenticating...");
     await login(email, password).then(
       (res) => {
         setStatus("Login succeeded!");
+        setAuth(true);
+        console.log("res.instance.value", res.instance.value);
         const id = res.instance.value.id;
         storeUser({
           id,
           secret: res.secret,
           email,
-				});
-				console.log('conf', id, email)
-				sendConfirmationEmail(id, email);
+        });
+        console.log("conf", id, email);
+        sendConfirmationEmail(id, email);
         getUserByEmail(email).then(
           (data) => {
             console.log("getUserByEmail", data);
@@ -56,7 +53,7 @@ export default function Signup() {
     setStatus("Creating account...");
     await signup(email, username, password).then(
       (res) => {
-				handleLogin();
+        handleLogin();
       },
       (err) => {
         setStatus(`Signup failed: ${err}`);

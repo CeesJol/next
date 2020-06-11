@@ -14,8 +14,7 @@ import { identity } from "../../pages/api/auth";
 
 export default function Dashboard(props) {
   const [req, setReq] = useState(false);
-  const [auth, setAuth] = useState(false);
-  const { getUser, clearUser } = useContext(UserContext);
+  const { auth, setAuth, getUser, clearUser } = useContext(UserContext);
   const { nav, editingProduct, data, error, getProducts } = useContext(
     DashboardContext
   );

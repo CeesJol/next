@@ -5,7 +5,8 @@ import { identity } from "../pages/api/auth";
 import { readUser } from "../pages/api/fauna";
 
 const UserContextProvider = (props) => {
-  const [user, setUser] = useState(null);
+	const [user, setUser] = useState(null);
+	const [auth, setAuth] = useState(false);
   const storeUser = (data) => {
     // Set state
     setUser((prevUser) => ({ ...prevUser, ...data }));
@@ -63,7 +64,8 @@ const UserContextProvider = (props) => {
         storeUser,
         getUser,
         clearUser,
-				userExists
+				userExists,
+				auth, setAuth
       }}
     >
       {props.children}
